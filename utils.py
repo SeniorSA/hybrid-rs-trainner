@@ -28,7 +28,7 @@ def load_products_data():
 
 
 produtos, atributos = load_products_data()
-neighbor = NearestNeighbors(metric='euclidean', algorithm='kdd')
+neighbor = NearestNeighbors(metric='euclidean')
 neighbor.fit(atributos)
 distances, indexes = neighbor.kneighbors([[hash('8'), hash('100-GCS')]], n_neighbors=5)
 
@@ -49,11 +49,15 @@ def load_customers_data():
     for document in cursor:
         ramo_codigo = '0'
         porte_codigo = '0'
-        cidade_codigo = '0'
-        uf_codigo = '0'
+
+
+        latitude_cidade = '0'
+        longitude_cidade = '0'
+
+        latitude_estado = '0'
+        longitude_estado = '0'
 
         ramo = document.get('ramoDeAtividade')
-
         if (ramo):
             ramo_codigo = ramo.get('codigo')
 
@@ -61,25 +65,21 @@ def load_customers_data():
         if (porte):
             porte_codigo = porte.get('codigo')
 
-        cliente_codigo = document['codigo']
+
+        cliente_codigo = document.get('codigo')
 
         cidade = document.get('cidade')
+
         if (cidade):
-            cidade_codigo = hash(cidade.get('nome'))
+            latitude_cidade = cidade.get('latitude')
+            longitude_cidade = cidade.get('longitude')
+
             if (cidade.get('estado')):
-                uf_codigo = hash(cidade.get('estado').get('sigla'))
-
-        # cnae_principal = document.get('cnaePrincipal')
-        # cnae_principal_codigo = '0'
-        # if (cnae_principal):
-        #     cnae_principal_codigo = cnae_principal.get('codigo')
-        #
-        # cnaes_secundarios = document.get('cnaesSecundarios')
-        # if (cnaes_secundarios):
-        #     for cnae_secundario in cnaes_secundarios:
+                latitude_estado = cidade.get('estado').get('latitude')
+                longitude_estado = cidade.get('estado').get('longitude')
 
 
-        atributos_clientes.append([porte_codigo, ramo_codigo, uf_codigo, cidade_codigo])
+        atributos_clientes.append([porte_codigo, ramo_codigo, latitude_estado, longitude_estado, latitude_cidade, longitude_cidade])
         clientes.append(cliente_codigo)
 
     return clientes, atributos_clientes
