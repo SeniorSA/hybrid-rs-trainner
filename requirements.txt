@@ -2,3 +2,4 @@ argparse>=1.4.0
 scikit-learn>=0.17
 numpy>=1.11.2
 scipy>=0.18
+pymongo==3.3.0
