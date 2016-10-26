@@ -1,4 +1,8 @@
-import pickle
+###
+# not working properly. Its recommending just the same amount of k-neighbors number #
+##
+
+
 from pymongo import MongoClient
 from os.path import join, dirname
 from sklearn.neighbors import NearestNeighbors
