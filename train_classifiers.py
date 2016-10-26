@@ -1,5 +1,6 @@
 import argparse
-from user_item_cbf import UserItemCollaborativeFiltering
+
+from collaborative_filtering.user_item_cbf import UserItemCollaborativeFiltering
 
 parser = argparse.ArgumentParser(description='Recommender Systems trainner')
 
