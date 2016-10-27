@@ -6,11 +6,12 @@
 from pymongo import MongoClient
 from os.path import join, dirname
 from sklearn.neighbors import NearestNeighbors
+
 client = MongoClient()
 db = client.testando
 
 
-def load_products_data(skip = 0, top = 0):
+def load_products_data(skip=0, top=0):
     count = db.produtos.count()
     cursor = None
     if top != 0:
@@ -37,10 +38,12 @@ def load_products_data(skip = 0, top = 0):
 
     return produtos, atributos_produtos
 
+
 def fit(atributos):
     neighbor = NearestNeighbors(metric='euclidean')
     neighbor.fit(atributos)
     return neighbor
+
 
 def count_predictions(prediction):
     print(prediction.get('codigo'))
@@ -62,17 +65,19 @@ def make_predictions(produtos, neighbor):
         if produto.get('familia'):
             familia_codigo = produto.get('familia').get('codigo')
 
-        distances, indexes = neighbor.kneighbors([[hash(linha_de_produto_codigo), hash(familia_codigo)]], n_neighbors=15)
+        distances, indexes = neighbor.kneighbors([[hash(linha_de_produto_codigo), hash(familia_codigo)]],
+                                                 n_neighbors=15)
 
         for index in xrange(len(indexes[0])):
             prediction = produtos[index]
-            #count_predictions(prediction)
+            # count_predictions(prediction)
             db.recomendacoesScikit.save({'produtoCodigo': prediction})
 
 
 def run():
     produtos, atributos = load_products_data()
     neighbor = fit(atributos)
-    make_predictions(produtos,neighbor)
+    make_predictions(produtos, neighbor)
+
 
 run()
