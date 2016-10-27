@@ -47,8 +47,16 @@ parser.add_argument('--weights', type=str, default='uniform',
                          'All points in each neighborhood are weighted equally. '
                          '"distance" : weight points by the inverse of their distance. in this case, closer neighbors of a query point will have a greater influence than neighbors which are further away.'
                          '[callable] : a user-defined function which accepts an array of distances, and returns an array of the same shape containing the weights.')
+
+parser.add_argument('--mongo-database-url', help='mongo database url', default='localhost')
+parser.add_argument('--mongo-database-name', help='mongo database name', default='testando')
+parser.add_argument('--customer-collection-name', help='mongo customer collection name', default='clientes')
+parser.add_argument('--item-collection-name', help='mongo item collection name', default='produtos')
+parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamento')
+
 args = parser.parse_args()
 
 
+##inject the data inside
 user_item_cbf  = UserItemCollaborativeFiltering(args)
 user_item_cbf.train()
