@@ -1,8 +1,6 @@
 from abc import abstractmethod, ABCMeta
 
 
-class CustomerRepository(object):
-    __metaclass__ = ABCMeta
-
+class CustomerRepository():
     @abstractmethod
     def get_customers_code(self): pass

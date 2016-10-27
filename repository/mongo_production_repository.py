@@ -5,7 +5,6 @@ from mongo_client_singleton import MongoClientSingleton
 
 class MongoProductionRepository(RepositoryFactory):
     def __init__(self, args):
-        super(RepositoryFactory)
         self.args = args
 
     def get_data_source(self):
