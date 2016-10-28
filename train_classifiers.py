@@ -62,10 +62,10 @@ print 2
 # user_item_cbf  = UserItemCollaborativeFiltering(args)
 # user_item_cbf.train()
 
-from repository.customer_repository_mongo import CustomerRepositoryMongo, CustomerRepository
+from repository.cliente_repository_mongo import ClienteRepositoryMongo, ClienteRepository
 from repository.mongo_production_repository import MongoProductionRepository
 
-customer_repository = CustomerRepositoryMongo(MongoProductionRepository(args))
+customer_repository = ClienteRepositoryMongo(MongoProductionRepository(args))
 codes = customer_repository.get_customers_code()
 for c in codes:
     print c
