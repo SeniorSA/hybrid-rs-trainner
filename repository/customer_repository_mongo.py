@@ -1,9 +1,9 @@
 from abc import abstractmethod, ABCMeta
 from repository.repository_factory import RepositoryFactory
 from repository.customer_repository import CustomerRepository
+from repository.mongo_repository import GenericMongoRepository
 
-
-class CustomerRepositoryMongo(CustomerRepository):
+class CustomerRepositoryMongo(CustomerRepository, GenericMongoRepository):
     def __init__(self, repository):
         self.repository = repository
 
@@ -13,11 +13,3 @@ class CustomerRepositoryMongo(CustomerRepository):
         customer_codes = customer_colls.distinct('codigo')
 
         return customer_codes
-
-    def add_customer(self, customer):
-        db = self.repository.get_data_source()[self.repository.args.mongo_database_name]
-        db[self.repository.args.customer_collection_name].save(customer)
-
-    def count(self):
-        db = self.repository.get_data_source()[self.repository.args.customer_collection_name]
-        return db.count()
