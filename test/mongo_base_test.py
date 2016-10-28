@@ -10,8 +10,6 @@ class MongoDatabaseTest(unittest.TestCase):
     # __metaclass__ = ABCMeta
     """Class with setup and tearsdown for all others tests"""
 
-
-
     def setUp(self):
         print '--------------------SETUP----------------------'
         mock_args = self.mock_args()
@@ -38,5 +36,7 @@ class MongoDatabaseTest(unittest.TestCase):
     def mock_args(self):
         args = Namespace(mongo_database_url='localhost', mongo_database_name='test',
                          customer_collection_name='clientes', item_collection_name='produtos',
-                         billing_collection_name='faturamentos')
+                         billing_collection_name='faturamentos', weighs='uniform', leaf_size=30,
+                         p=2, n_neighbors=5, kfold=10, alg='brute', distance_metric='euclidean'
+                         )
         return args
