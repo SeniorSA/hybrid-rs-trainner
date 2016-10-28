@@ -1,6 +1,6 @@
 from repository.generic_repository import GenericRepository
 
 
-class BillingRepository(GenericRepository):
+class FaturamentoRepository(GenericRepository):
     def test(self):
         print 2

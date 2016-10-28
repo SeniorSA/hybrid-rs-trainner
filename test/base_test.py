@@ -1,7 +1,7 @@
 import json
 import unittest
 from abc import ABCMeta
-from argparse  import Namespace
+from argparse import Namespace
 
 from repository.mongo_mock_repository import MongoMockRepository
 
@@ -11,12 +11,13 @@ class MongoDatabaseTest(unittest.TestCase):
     """Class with setup and tearsdown for all others tests"""
 
     def setUp(self):
+        print '--------------------SETUP----------------------'
         mock_args = self.mock_args()
         self.mock = MongoMockRepository(mock_args)
         self.data_source = self.mock.get_data_source()
         print self.data_source
 
-        files_names = ['clientes-test.json', 'produtos-test.json', 'faturamento-test.json']
+        files_names = ['clientes-test.json', 'produtos-test.json', 'faturamentos-test.json']
 
         for file_name in files_names:
             collection_name = file_name.split('-')[0]
@@ -27,5 +28,7 @@ class MongoDatabaseTest(unittest.TestCase):
                     self.data_source[collection_name].save(document)
 
     def mock_args(self):
-        args = Namespace(mongo_database_url='localhost', mongo_database_name='test', customer_collection_name='clientes', item_collection_name='produtos', billing_collection_name='faturamento')
+        args = Namespace(mongo_database_url='localhost', mongo_database_name='test',
+                         customer_collection_name='clientes', item_collection_name='produtos',
+                         billing_collection_name='faturamento')
         return args

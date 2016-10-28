@@ -1,9 +1,9 @@
 from abc import abstractmethod, ABCMeta
 from repository.repository_factory import RepositoryFactory
-from repository.customer_repository import CustomerRepository
+from repository.cliente_repository import ClienteRepository
 from repository.mongo_repository import GenericMongoRepository
 
-class CustomerRepositoryMongo(CustomerRepository, GenericMongoRepository):
+class ClienteRepositoryMongo(ClienteRepository, GenericMongoRepository):
     def __init__(self, repository):
         self.repository = repository
 
