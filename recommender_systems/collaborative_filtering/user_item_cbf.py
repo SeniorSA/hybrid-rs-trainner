@@ -7,47 +7,60 @@ from sklearn.neighbors import NearestNeighbors
 
 
 class UserItemCollaborativeFiltering:
-    def __init__(self, args, data_source):
+
+    """The billings args should be pass a billings matrix like:
+        - a list of dicts which should contains the keys:
+         > a str customer_code (representing the customer identifier)
+         > a str item_code (representing the item identifier)
+         > a float rating (represeting the rating which the knn based methods will use to calculate de similarity between the customers)
+        - it should look like this:
+            [{'customer_code': 'c1', 'item_code': 'i1', 'rating': 0}]
+    """
+    def __init__(self, args, billings, customers, items):
+        self.__validate_params(args, billings, customers, items)
+        self.billings = billings
+        self.customers = customers
+        self.items = items
+
+    def __validate_params(self, args, billings, customers, items):
+        if billings == None or len(billings) > len(customers) * len(items):
+            raise Exception('billings data source invalid')
+
+        if customers == None:
+            raise Exception('customers data source invalid')
+
+        if items == None:
+            raise Exception('items data source invalid')
+
         if args == None:
             raise Exception
-        self.__validate_params(args, data_source)
-        self.args = args
-        self.data_source = data_source
-
-    def __validate_params(self, args, data_source):
-        if ['customer', 'items', 'billings'] not in data_source.keys():
-            raise Exception('the data source must contain ["customers", "items", "billings"]')
-
-        if args == None:
-            raise Exception("args can't be invalid.")
 
     def __init_cf_matrix(self):
-        customers = np.array(self.data_source.get('customer'))
-        items = np.array(self.data_source.get('items'))
+        customers = np.array(self.customers)
+        items = np.array(self.items)
         items_count = len(items)
 
-        cf_matrix = pd.DataFrame(data=0 * items_count, index=items, columns=customers, dtype=float)
+        cf_matrix = pd.DataFrame(data=0 * items_count, index=customers, columns=items, dtype=float)
 
         return cf_matrix
 
-    # its too much coupled
     def train(self):
-        # billing_count = db.faturamento.count()
-        billing_count = 1540
+        billing_count = len(self.billings)
 
         divider = float(billing_count) / self.args.kfold
         for k in xrange(1, self.args.kfold + 1):
             skip = int(k * divider)
-            test_sample = db.faturamento.find().limit(skip)
-            target_sample = db.faturamento.find().skip(skip + 1)
+            ## split the data
+            test_sample = self.billings[:skip]
+            target_sample = self.billings[skip + 1:]
 
             cf_matrix = self.fit_cf_matrix(target_sample)
             self.__calculate_neighbors(test_sample, cf_matrix)
 
     def __calculate_neighbors(self, test_sample, cf_matrix):
         for test_document in test_sample:
-            item_code = test_document.get('produto').get('codigo')
-            customer_code = test_document.get('cliente').get('codigo')
+            item_code = test_document.get('item_code')
+            customer_code = test_document.get('customer_code')
             # get the item by the row, since its indexed by item
             target_features = cf_matrix.loc[customer_code].values
 
@@ -61,16 +74,17 @@ class UserItemCollaborativeFiltering:
     def fit_cf_matrix(self, target_sample):
         cf_matrix = self.__init_cf_matrix()
 
+        #veryfid
         for target_document in target_sample:
-            liquid_value = target_document.get('valorLiquido')
-            customer_code = target_document.get('cliente').get('codigo')
-            item_code = target_document.get('produto').get('codigo')
-            cf_matrix[customer_code][item_code] += liquid_value
+            rating = target_document.get('rating')
+            customer_code = target_document.get('customer_code')
+            item_code = target_document.get('item_code')
+            cf_matrix[customer_code][item_code] += rating
 
         return cf_matrix
 
     def __find_knn(self, cf_matrix, target_features):
-        neighbors = NearestNeighbors(n_neighbors=args.n_neighbors, algorithm=args.alg).fit(cf_matrix.values)
+        neighbors = NearestNeighbors(n_neighbors=self.args.n_neighbors, algorithm=self.args.alg).fit(cf_matrix.values)
         distances, indexes = neighbors.kneighbors(target_features)
 
         return distances, indexes
