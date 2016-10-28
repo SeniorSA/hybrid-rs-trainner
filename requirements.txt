@@ -4,3 +4,4 @@ numpy>=1.11.2
 scipy>=0.18
 pymongo==3.3.0
 mongomock==3.7.0
+testfixtures==4.12.0
