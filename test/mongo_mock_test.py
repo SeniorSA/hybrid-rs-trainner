@@ -12,22 +12,22 @@ class MongoMockRepositoryTest(MongoDatabaseTest):
         for i in customers:
             count += 1
 
-        self.assertEqual(count, 19)
+        self.assertEqual(count, 13)
 
-    def it_should_return_19_customers_test(self):
+    def it_should_return_13_customers_test(self):
         repository = ClienteRepositoryMongo(self.mock)
         count = repository.count()
 
-        self.assertEqual(count, 19)
+        self.assertEqual(count, 13)
 
     def it_should_return_billings_count_which_its_equals_to_200_test(self):
         repository = FaturamentoRepositoryMongo(self.mock)
         count = repository.count()
 
-        self.assertEqual(count, 200)
+        self.assertEqual(count, 20)
 
     def it_should_return_items_count_which_its_equals_to_77_test(self):
         repository = ProdutoRepositoryMongo(self.mock)
         count = repository.count()
 
-        self.assertEqual(count, 77)
+        self.assertEqual(count, 6)
