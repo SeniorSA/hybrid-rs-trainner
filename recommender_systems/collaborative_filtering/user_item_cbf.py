@@ -7,15 +7,17 @@ from sklearn.neighbors import NearestNeighbors
 
 
 class UserItemCollaborativeFiltering:
-
-    """The billings args should be pass a billings matrix like:
-        - a list of dicts which should contains the keys:
-         > a str customer_code (representing the customer identifier)
-         > a str item_code (representing the item identifier)
-         > a float rating (represeting the rating which the knn based methods will use to calculate de similarity between the customers)
-        - it should look like this:
-            [{'customer_code': 'c1', 'item_code': 'i1', 'rating': 0}]
+    """ * billings args should be pass a billings matrix like:
+            - a list of dicts which should contains the keys:
+            > a str customer_code (representing the customer identifier)
+            > a str item_code (representing the item identifier)
+            > a float rating (represeting the rating which the knn based methods will use to calculate de similarity between the customers)
+                - it should look like this:
+                [{'customer_code': 'c1', 'item_code': 'i1', 'rating': 0}]
+        * customers args should be an array of str representing the customer ID
+        * items args should be an array of str representing the item ID
     """
+
     def __init__(self, args, billings, customers, items):
         self.__validate_params(args, billings, customers, items)
         self.billings = billings
@@ -64,17 +66,25 @@ class UserItemCollaborativeFiltering:
             # get the item by the row, since its indexed by item
             target_features = cf_matrix.loc[customer_code].values
 
-            nearest_neighbors = self.__find_knn(cf_matrix, target_features)
-            self.__validate_neighbors(nearest_neighbors, cf_matrix)
+            distances, indexes = self.__find_knn(cf_matrix, target_features)
+            self.__validate_fold(distances, indexes, cf_matrix)
 
-    def __validate_neighbors(self, nearest_neighbors, cf_matrix):
-        for neighbor in nearest_neighbors:
-            print neighbor
+    def __validate_fold(self, distances, indexes, cf_matrix):
+        cf_matrix_values = cf_matrix.values
+        neighbors = []
+
+        # I don't know for sure if always return a matrix like [0] x N, where N its the number of neighbors.
+        # If returns more than [0] n N, something like [1] x N, then this method should be rewrited.
+        for i in indexes[0]:
+            customer_code = self.customers[i]
+            neighbors.append(customer_code)
+
+        print neighbors
 
     def fit_cf_matrix(self, target_sample):
         cf_matrix = self.__init_cf_matrix()
 
-        #veryfid
+        # veryfid
         for target_document in target_sample:
             rating = target_document.get('rating')
             customer_code = target_document.get('customer_code')
