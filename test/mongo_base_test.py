@@ -15,8 +15,8 @@ class MongoDatabaseTest(unittest.TestCase):
     def setUp(self):
         print '--------------------SETUP----------------------'
         mock_args = self.mock_args()
-        self.mock = MongoMockRepository(mock_args)
-        self.data_source = self.mock.get_data_source()
+        self.repository_mock = MongoMockRepository(mock_args)
+        self.data_source = self.repository_mock.get_data_source()
         print self.data_source
 
         files_names = ['clientes-test.json', 'produtos-test.json', 'faturamentos-test.json']
