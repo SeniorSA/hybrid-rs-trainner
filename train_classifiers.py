@@ -56,7 +56,17 @@ parser.add_argument('--billing-collection-name', help='mongo billing collection 
 
 args = parser.parse_args()
 
+print 2
 
 ##inject the data inside
-user_item_cbf  = UserItemCollaborativeFiltering(args)
-user_item_cbf.train()
+# user_item_cbf  = UserItemCollaborativeFiltering(args)
+# user_item_cbf.train()
+
+from repository.customer_repository_mongo import CustomerRepositoryMongo, CustomerRepository
+from repository.mongo_production_repository import MongoProductionRepository
+
+customer_repository = CustomerRepositoryMongo(MongoProductionRepository(args))
+codes = customer_repository.get_customers_code()
+for c in codes:
+    print c
+
