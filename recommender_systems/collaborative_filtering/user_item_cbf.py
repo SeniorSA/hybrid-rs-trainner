@@ -5,22 +5,25 @@ import numpy as np
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 
-client = MongoClient()
-db = client.testando
-
-args = None
-
 
 class UserItemCollaborativeFiltering:
-    def __init__(self, args):
+    def __init__(self, args, data_source):
         if args == None:
             raise Exception
+        self.__validate_params(args, data_source)
         self.args = args
+        self.data_source = data_source
+
+    def __validate_params(self, args, data_source):
+        if ['customer', 'items', 'billings'] not in data_source.keys():
+            raise Exception('the data source must contain ["customers", "items", "billings"]')
+
+        if args == None:
+            raise Exception("args can't be invalid.")
 
     def __init_cf_matrix(self):
-        ##too much coupled
-        customers = np.array(db.clientes.distinct('codigo'))
-        items = np.array(db.produtos.distinct('codigo'))
+        customers = np.array(self.data_source.get('customer'))
+        items = np.array(self.data_source.get('items'))
         items_count = len(items)
 
         cf_matrix = pd.DataFrame(data=0 * items_count, index=items, columns=customers, dtype=float)
