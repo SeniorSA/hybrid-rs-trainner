@@ -1,6 +1,6 @@
 import argparse
 
-from recommender_systems.collaborative_filtering import  UserItemCollaborativeFiltering
+from recommender_systems.collaborative_filtering import  UserUserCollaborativeFiltering
 
 parser = argparse.ArgumentParser(description='Recommender Systems trainner')
 
@@ -37,6 +37,7 @@ parser.add_argument('--alg', help='The KNN implementation algorithm. There are f
                                   'auto - will attempt to decide the most appropriate algorithm based on the values passed to fit method',
                     default='brute', type=str)
 parser.add_argument('--n-neighbor', help='define the n nearest neighbors', type=int, default=5)
+parser.add_argument('--top-items', help='define the top items (or users) rated by similar users (items)', default=10, type=int)
 parser.add_argument('--p', default=2, type=int,
                     help='Power parameter for the Minkowski metric. When p = 1, this is equivalent to using manhattan_distance (l1), and euclidean_distance (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.')
 parser.add_argument('--leaf-size', type=int, default=30,
