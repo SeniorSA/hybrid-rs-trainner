@@ -94,15 +94,18 @@ class UserUserCollaborativeFiltering:
                     else:
                         items_votes[item] += 1
 
-        return self.__vote(items_votes)
+        return self.vote(items_votes)
 
-    def __vote(self, items_votes):
+    def vote(self, items_votes):
         #sort the most voted items
         items_votes = OrderedDict(sorted(items_votes.items(), key=lambda x: x[1]))
         top_items = items_votes.keys()
 
+        size = len(top_items)
+        first_index = size - self.__args.top_items
+
         #split the top items till top_items_threashold
-        top_items = top_items[self.__args.top_items:]
+        top_items = top_items[first_index:]
 
         return set(top_items)
 

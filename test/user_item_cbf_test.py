@@ -9,8 +9,18 @@ from recommender_systems.collaborative_filtering.user_user_cbf import UserUserCo
 
 
 class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
-
     def it_should_pass_test(self):
+        cf_user_item = self.set_up()
+        cf_user_item.train()
+        metrics = cf_user_item.get_metrics()
+        accuracy = 0
+        for acc in metrics.get('accuracies'):
+            accuracy += acc
+
+        accuracy = accuracy / len(metrics.get('accuracies'))
+        self.assertTrue(True)
+
+    def set_up(self):
         produto_repository = ProdutoRepositoryMongo(self.repository_mock)
         items = produto_repository.get_customers_code()
 
@@ -20,14 +30,11 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         faturamento_repostiory = FaturamentoRepositoryMongo(self.repository_mock)
         billings = faturamento_repostiory.find()
 
-        cf_user_item = UserUserCollaborativeFiltering(self.mock_args(), billings, customers, items)
+        return UserUserCollaborativeFiltering(self.mock_args(), billings, customers, items)
 
-        cf_user_item.train()
-
-        metrics = cf_user_item.get_metrics()
-        accuracy = 0
-        for acc in metrics.get('accuracies'):
-            accuracy += acc
-
-        accuracy = accuracy/len(metrics.get('accuracies'))
-        self.assertTrue(True)
+    def it_should_return_most_vote_items_from_dict_test(self):
+        cf_user_item = self.set_up()
+        items = {'A': 3, 'B': 100, 'C': -2, 'D': 2000, 'E': 150, 'F': 50000, 'X': 1750, 'Y': 100000}
+        expected_items = set(['Y', 'F', 'D', 'X','E'])
+        voted_items = cf_user_item.vote(items)
+        self.assertEqual(expected_items, voted_items)
