@@ -37,6 +37,7 @@ class MongoDatabaseTest(unittest.TestCase):
         args = Namespace(mongo_database_url='localhost', mongo_database_name='test',
                          customer_collection_name='clientes', item_collection_name='produtos',
                          billing_collection_name='faturamentos', weighs='uniform', leaf_size=30,
-                         p=2, n_neighbors=5, kfold=10, alg='brute', distance_metric='euclidean'
+                         p=2, n_neighbors=5, kfold=10, alg='brute', distance_metric='euclidean',
+                         top_items=5
                          )
         return args
