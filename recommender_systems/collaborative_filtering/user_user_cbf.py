@@ -107,13 +107,15 @@ class UserUserCollaborativeFiltering:
         #split the top items till top_items_threashold
         top_items = top_items[first_index:]
 
-        return set(top_items)
+        top_items.reverse()
+
+        return top_items
 
     def __calculate_acuracy(self, indexes, customer_code, cf_matrix):
         most_voted_items = self.__get__most_voted_items(indexes, cf_matrix)
         test_items = set(cf_matrix.loc[customer_code].index)
 
-        hits = most_voted_items.intersection(test_items)
+        hits = set(most_voted_items).intersection(test_items)
 
         accuracy = len(hits)/test_items
 
