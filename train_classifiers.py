@@ -51,23 +51,25 @@ parser.add_argument('--weights', type=str, default='uniform',
 
 parser.add_argument('--mongo-database-url', help='mongo database url', default='localhost')
 parser.add_argument('--mongo-database-name', help='mongo database name', default='testando')
-parser.add_argument('--customer-collection-name', help='mongo customer collection name', default='clientes')
-parser.add_argument('--item-collection-name', help='mongo item collection name', default='produtos')
-parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamento')
+parser.add_argument('--customer-collection-name', help='mongo customer collection name', default='clientesTeste')
+parser.add_argument('--item-collection-name', help='mongo item collection name', default='produtosTeste')
+parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamentoTeste')
 
 args = parser.parse_args()
 
-print 2
-
-##inject the data inside
-# user_item_cbf  = UserItemCollaborativeFiltering(args)
-# user_item_cbf.train()
-
-from repository.cliente_repository_mongo import ClienteRepositoryMongo, ClienteRepository
+from repository.cliente_repository_mongo import ClienteRepositoryMongo
+from repository.produto_repository_mongo import ProdutoRepositoryMongo, ProdutoRepository
+from repository.faturamento_repository_mongo import FaturamentoRepositoryMongo
 from repository.mongo_production_repository import MongoProductionRepository
+from repository.mongo_repository import GenericMongoRepository
+from mongo_utils import load_data
 
+
+item_repository = ProdutoRepositoryMongo(MongoProductionRepository(args))
+billing_repository = FaturamentoRepositoryMongo(MongoProductionRepository(args))
 customer_repository = ClienteRepositoryMongo(MongoProductionRepository(args))
-codes = customer_repository.get_customers_code()
-for c in codes:
-    print c
+
+cf_matrix = load_data(customer_repository, item_repository, billing_repository)
+
+user_user_cf = UserUserCollaborativeFiltering(args, cf_matrix)
 

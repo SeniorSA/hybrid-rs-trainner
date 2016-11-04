@@ -24,6 +24,7 @@ def load_data(customer_repository, item_repository, billing_repository):
             rating = 0
         customer_code = target_document.get('cliente').get('codigo')
         item_code = target_document.get('produto').get('codigo')
-        cf_matrix.loc[customer_code][item_code] += rating
+        if item_code in cf_matrix.columns and customer_code in cf_matrix.index:
+            cf_matrix.loc[customer_code][item_code] += rating
 
     return cf_matrix

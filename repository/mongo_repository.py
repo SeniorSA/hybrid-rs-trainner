@@ -13,7 +13,7 @@ class GenericMongoRepository(GenericRepository):
         db = self.repository.get_data_source()[self.__get_repository_name()]
         return db.count()
 
-    def find(self, skip = 0, top=float("inf")):
+    def find(self, skip = 0, top=50000000):
         data_source = self.repository.get_data_source()
         customer_colls = data_source[self.__get_repository_name()]
         customers = customer_colls.find()

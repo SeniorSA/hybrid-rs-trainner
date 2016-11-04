@@ -25,6 +25,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 logger.addHandler(streamHandler)
 
+
 class UserUserCollaborativeFiltering:
     """ * the args params should be an namespace ... [to be continued]
         * the data param should contain a pandas dataframe containing where the row (index) should be users and columns should be a item.
@@ -125,7 +126,6 @@ class UserUserCollaborativeFiltering:
             std_value = np.std(metrics[key])
 
             logging.info(key + ' mean = ' + str(avg_value) + ' standard deviation = ' + str(std_value))
-
 
     def __get__most_voted_items(self, indexes, cf_matrix):
         items_votes = {}
