@@ -6,7 +6,7 @@ from repository.produto_repository_mongo import ProdutoRepositoryMongo
 from repository.faturamento_repository_mongo import FaturamentoRepositoryMongo
 from mongo_utils import load_data
 
-from recommender_systems.collaborative_filtering.user_user_cbf import UserUserCollaborativeFiltering
+from recommender_systems.collaborative_filtering.user_user_cf import UserUserCollaborativeFiltering
 
 
 class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
@@ -28,9 +28,9 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
 
         return UserUserCollaborativeFiltering(self.mock_args(), cf_matrix)
 
-    # def it_should_return_most_vote_items_from_dict_test(self):
-    #     cf_user_item = self.set_up()
-    #     items = {'A': 3, 'B': 100, 'C': -2, 'D': 2000, 'E': 150, 'F': 50000, 'X': 1750, 'Y': 100000}
-    #     expected_items = ['Y', 'F', 'D', 'X', 'E']
-    #     voted_items = cf_user_item.vote(items)
-    #     self.assertEqual(expected_items, voted_items)
+        # def it_should_return_most_vote_items_from_dict_test(self):
+        #     cf_user_item = self.set_up()
+        #     items = {'A': 3, 'B': 100, 'C': -2, 'D': 2000, 'E': 150, 'F': 50000, 'X': 1750, 'Y': 100000}
+        #     expected_items = ['Y', 'F', 'D', 'X', 'E']
+        #     voted_items = cf_user_item.vote(items)
+        #     self.assertEqual(expected_items, voted_items)

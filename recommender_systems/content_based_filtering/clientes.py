@@ -1,5 +1,7 @@
 from pymongo import MongoClient
 
+
+
 def load_customers_data():
     client = MongoClient()
     db = client.testando
