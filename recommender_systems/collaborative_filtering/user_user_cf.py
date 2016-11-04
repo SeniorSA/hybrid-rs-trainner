@@ -1,12 +1,29 @@
-from pymongo import MongoClient
 from os.path import join, dirname
-import numpy as np
-import pandas as pd
+import logging
 from collections import OrderedDict
 
+import numpy as np
+import pandas as pd
 from sklearn.neighbors import NearestNeighbors
 from recommender_systems.evaluation_metrics_utils import calculate_classification_metrics, calculate_regression_metrics
 
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# create a file handler
+handler = logging.FileHandler('user_user_cf.log')
+handler.setLevel(logging.DEBUG)
+
+streamHandler = logging.StreamHandler()
+streamHandler.setLevel(logging.DEBUG)
+
+# create a logging format
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+# add the handlers to the logger
+logger.addHandler(handler)
+logger.addHandler(streamHandler)
 
 class UserUserCollaborativeFiltering:
     """ * the args params should be an namespace ... [to be continued]
@@ -42,12 +59,12 @@ class UserUserCollaborativeFiltering:
             skip = int(k * divider)
             ## split the data
 
-            first_index = int((k-1) * divider)
+            first_index = int((k - 1) * divider)
             test_sample = self.data.iloc[first_index:skip]
 
             after = self.data.iloc[skip + 1:]
             if first_index > 0:
-                before = self.data.iloc[:first_index-1]
+                before = self.data.iloc[:first_index - 1]
                 cf_target_sample = pd.concat([before, after])
 
             else:
@@ -73,7 +90,7 @@ class UserUserCollaborativeFiltering:
             self.__handle_metrics(metrics, index)
 
     def __handle_metrics(self, metrics, index):
-        fold = self.__metrics[index-1]
+        fold = self.__metrics[index - 1]
         fold['recall_score'].append(metrics['recall_score'])
         fold['accuracy_score'].append(metrics['accuracy_score'])
         fold['precision_score'].append(metrics['precision_score'])
@@ -100,6 +117,16 @@ class UserUserCollaborativeFiltering:
         full_data = pd.concat([before_test_index, after_test_index])
         self.data = full_data
 
+        self.__dump_metrics(self.__metrics[test_fold_index])
+
+    def __dump_metrics(self, metrics):
+        for key in metrics.keys():
+            avg_value = np.mean(metrics[key])
+            std_value = np.std(metrics[key])
+
+            logging.info(key + ' mean = ' + str(avg_value) + ' standard deviation = ' + str(std_value))
+
+
     def __get__most_voted_items(self, indexes, cf_matrix):
         items_votes = {}
 
@@ -123,28 +150,6 @@ class UserUserCollaborativeFiltering:
                 votes.append(0)
 
         return votes
-
-    """ * return most voted items based on ratings
-    """
-
-    # def vote(self, items_votes, threashold=None):
-    #     # sort the most voted items
-    #     items_votes = OrderedDict(sorted(items_votes.items(), key=lambda x: x[1]))
-    #
-    #     top_items = items_votes.keys()
-    #
-    #     size = len(top_items)
-    #     if threashold == None:
-    #         threashold = self.__args.top_items
-    #
-    #     first_index = size - threashold
-    #
-    #     # split the top items till top_items_threashold
-    #     top_items = top_items[first_index:]
-    #
-    #     top_items.reverse()
-    #
-    #     return top_items
 
     def calculate_metrics(self, indexes, expected_ratings, cf_matrix):
         metrics = {}
