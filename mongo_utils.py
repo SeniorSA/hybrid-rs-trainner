@@ -18,6 +18,10 @@ def load_data(customer_repository, item_repository, billing_repository):
 
     for target_document in documents:
         rating = target_document.get('valorLiquido')
+        if rating > 0:
+            rating = 1
+        else:
+            rating = 0
         customer_code = target_document.get('cliente').get('codigo')
         item_code = target_document.get('produto').get('codigo')
         cf_matrix.loc[customer_code][item_code] += rating

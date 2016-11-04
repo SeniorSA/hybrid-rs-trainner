@@ -19,7 +19,7 @@ class UserUserCollaborativeFiltering:
         self.__args = args
         self.data = data
         self.list_index = list(data.index)
-        self.__metrics = []
+        self.__init_metrics()
 
     def __validate_params(self, args, data):
         if args == None:
@@ -42,8 +42,16 @@ class UserUserCollaborativeFiltering:
             skip = int(k * divider)
             ## split the data
 
-            test_sample = self.data.iloc[:skip]
-            cf_target_sample = self.data.iloc[skip + 1:]
+            first_index = int((k-1) * divider)
+            test_sample = self.data.iloc[first_index:skip]
+
+            after = self.data.iloc[skip + 1:]
+            if first_index > 0:
+                before = self.data.iloc[:first_index-1]
+                cf_target_sample = pd.concat([before, after])
+
+            else:
+                cf_target_sample = after
 
             self.__calculate_neighbors_fold(test_sample, cf_target_sample, k)
 
@@ -65,7 +73,7 @@ class UserUserCollaborativeFiltering:
             self.__handle_metrics(metrics, index)
 
     def __handle_metrics(self, metrics, index):
-        fold = self.__metrics[index]
+        fold = self.__metrics[index-1]
         fold['recall_score'].append(metrics['recall_score'])
         fold['accuracy_score'].append(metrics['accuracy_score'])
         fold['precision_score'].append(metrics['precision_score'])
@@ -81,7 +89,7 @@ class UserUserCollaborativeFiltering:
         accuracies = []
         for metric in self.__metrics:
             acc = metric.get('accuracy_score')
-            accuracies.push(np.mean(acc))
+            accuracies.append(np.mean(acc))
             # accuracy_std = np.std(acc)
 
         max_accuracy = max(accuracies)
@@ -107,7 +115,14 @@ class UserUserCollaborativeFiltering:
                 items_votes[item_key] += item_ratings[item_key]
 
         # return self.vote(items_votes, len(self.data.columns))
-        return items_votes.values()
+        votes = []
+        for i in items_votes.values():
+            if i > 0:
+                votes.append(1)
+            else:
+                votes.append(0)
+
+        return votes
 
     """ * return most voted items based on ratings
     """
