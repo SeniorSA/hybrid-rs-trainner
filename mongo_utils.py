@@ -1,16 +1,9 @@
-from repository.mongo_production_repository import MongoProductionRepository
-from repository.faturamento_repository import FaturamentoRepository
-from repository.cliente_repository import  ClienteRepository
-from repository.produto_repository import ProdutoRepository
-from repository.generic_repository import GenericRepository
 import pandas as pd
 import numpy as np
 
-def init_cf_matrix(args):
-    customer_repository = ClienteRepository(MongoProductionRepository(args=args))
-    customers = np.array(customer_repository.get_customers_code())
 
-    item_repository = ProdutoRepository(MongoProductionRepository(args=args))
+def init_cf_matrix(customer_repository, item_repository):
+    customers = np.array(customer_repository.get_customers_code())
     items = np.array(item_repository.get_items_code())
     items_count = len(items)
 
@@ -19,10 +12,9 @@ def init_cf_matrix(args):
     return cf_matrix
 
 
-def load_data(args):
-    billings = FaturamentoRepository(MongoProductionRepository(args))
-    documents = billings.find()
-    cf_matrix = init_cf_matrix()
+def load_data(customer_repository, item_repository, billing_repository):
+    documents = billing_repository.find()
+    cf_matrix = init_cf_matrix(customer_repository=customer_repository, item_repository=item_repository)
 
     for target_document in documents:
         rating = target_document.get('valorLiquido')

@@ -4,6 +4,7 @@ from mongo_base_test import MongoDatabaseTest
 from repository.cliente_repository_mongo import ClienteRepositoryMongo
 from repository.produto_repository_mongo import ProdutoRepositoryMongo
 from repository.faturamento_repository_mongo import FaturamentoRepositoryMongo
+from mongo_utils import load_data
 
 from recommender_systems.collaborative_filtering.user_user_cbf import UserUserCollaborativeFiltering
 
@@ -21,16 +22,13 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         self.assertTrue(True)
 
     def set_up(self):
-        produto_repository = ProdutoRepositoryMongo(self.repository_mock)
-        items = produto_repository.get_customers_code()
+        item_repository = ProdutoRepositoryMongo(self.repository_mock)
+        customer_repository = ClienteRepositoryMongo(self.repository_mock)
+        billing_repository = FaturamentoRepositoryMongo(self.repository_mock)
 
-        cliente_repository = ClienteRepositoryMongo(self.repository_mock)
-        customers = cliente_repository.get_customers_code()
+        cf_matrix = load_data(customer_repository=customer_repository, item_repository=item_repository, billing_repository=billing_repository)
 
-        faturamento_repostiory = FaturamentoRepositoryMongo(self.repository_mock)
-        billings = faturamento_repostiory.find()
-
-        return UserUserCollaborativeFiltering(self.mock_args(), billings, customers, items)
+        return UserUserCollaborativeFiltering(self.mock_args(), cf_matrix)
 
     def it_should_return_most_vote_items_from_dict_test(self):
         cf_user_item = self.set_up()
@@ -38,3 +36,5 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         expected_items = ['Y', 'F', 'D', 'X','E']
         voted_items = cf_user_item.vote(items)
         self.assertEqual(expected_items, voted_items)
+
+
