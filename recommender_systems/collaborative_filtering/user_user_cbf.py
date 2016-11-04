@@ -22,9 +22,6 @@ class UserUserCollaborativeFiltering:
         self.__metrics = []
 
     def __validate_params(self, args, data):
-        if data == None:
-            raise Exception
-
         if args == None:
             raise Exception
 
@@ -106,7 +103,7 @@ class UserUserCollaborativeFiltering:
         for i in indexes:
             item_ratings = self.data.iloc[i]
 
-            for item_key in item_ratings:
+            for item_key in item_ratings.index:
                 items_votes[item_key] += item_ratings[item_key]
 
         # return self.vote(items_votes, len(self.data.columns))
@@ -156,7 +153,7 @@ class UserUserCollaborativeFiltering:
     def get_metrics(self):
         return self.__metrics
 
-    def __find_knn__find_knn(self, target_matrix, target_features):
+    def __find_knn(self, target_matrix, target_features):
         neighbors = NearestNeighbors(n_neighbors=self.__args.n_neighbors, algorithm=self.__args.alg).fit(
             target_matrix.values)
         distances, indexes = neighbors.kneighbors(target_features)
