@@ -19,9 +19,11 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         self.assertTrue(True)
 
     def set_up(self):
-        item_repository = ProdutoRepositoryMongo(self.repository_mock)
-        customer_repository = ClienteRepositoryMongo(self.repository_mock)
-        billing_repository = FaturamentoRepositoryMongo(self.repository_mock)
+        item_repository = ProdutoRepositoryMongo(self.repository_mock, self.repository_mock.args.item_collection_name)
+        customer_repository = ClienteRepositoryMongo(self.repository_mock,
+                                                     self.repository_mock.args.customer_collection_name)
+        billing_repository = FaturamentoRepositoryMongo(self.repository_mock,
+                                                        self.repository_mock.args.billing_collection_name)
 
         cf_matrix = load_data(customer_repository=customer_repository, item_repository=item_repository,
                               billing_repository=billing_repository)

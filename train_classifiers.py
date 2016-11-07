@@ -1,10 +1,11 @@
 import argparse
 
-from recommender_systems.collaborative_filtering import  UserUserCollaborativeFiltering
+from recommender_systems.collaborative_filtering import UserUserCollaborativeFiltering
 
 parser = argparse.ArgumentParser(description='Recommender Systems trainner')
 
-parser.add_argument('--kfold', help='the number o fold to stratify using k-fold cross-validation', type=float, default=10)
+parser.add_argument('--kfold', help='the number o fold to stratify using k-fold cross-validation', type=float,
+                    default=10)
 parser.add_argument('--distance-metric', help='the distance metric used to identify nearby items and customers. '
                                               'The metrics available to real-dimensional feature spaces are : \n'
                                               'euclidean \n'
@@ -36,8 +37,9 @@ parser.add_argument('--alg', help='The KNN implementation algorithm. There are f
                                   'brute - will use a brute-force search.\n'
                                   'auto - will attempt to decide the most appropriate algorithm based on the values passed to fit method',
                     default='brute', type=str)
-parser.add_argument('--n-neighbor', help='define the n nearest neighbors', type=int, default=5)
-parser.add_argument('--top-items', help='define the top items (or users) rated by similar users (items)', default=10, type=int)
+parser.add_argument('--n-neighbors', help='define the n nearest neighbors', type=int, default=5)
+parser.add_argument('--top-items', help='define the top items (or users) rated by similar users (items)', default=10,
+                    type=int)
 parser.add_argument('--p', default=2, type=int,
                     help='Power parameter for the Minkowski metric. When p = 1, this is equivalent to using manhattan_distance (l1), and euclidean_distance (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.')
 parser.add_argument('--leaf-size', type=int, default=30,
@@ -64,12 +66,11 @@ from repository.mongo_production_repository import MongoProductionRepository
 from repository.mongo_repository import GenericMongoRepository
 from mongo_utils import load_data
 
-
-item_repository = ProdutoRepositoryMongo(MongoProductionRepository(args))
-billing_repository = FaturamentoRepositoryMongo(MongoProductionRepository(args))
-customer_repository = ClienteRepositoryMongo(MongoProductionRepository(args))
+item_repository = ProdutoRepositoryMongo(MongoProductionRepository(args), args.item_collection_name)
+billing_repository = FaturamentoRepositoryMongo(MongoProductionRepository(args), args.billing_collection_name)
+customer_repository = ClienteRepositoryMongo(MongoProductionRepository(args), args.customer_collection_name)
 
 cf_matrix = load_data(customer_repository, item_repository, billing_repository)
 
 user_user_cf = UserUserCollaborativeFiltering(args, cf_matrix)
-
+user_user_cf.train()

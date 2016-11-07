@@ -1,8 +1,8 @@
 from generic_repository import GenericRepository
 
-class GenericMongoRepository(GenericRepository):
 
-    def __init__(self, repository):
+class GenericMongoRepository(GenericRepository):
+    def __init__(self, repository, collection_name):
         self.repository = repository
 
     def __get_repository_name(self):
@@ -10,12 +10,14 @@ class GenericMongoRepository(GenericRepository):
         return class_n + 's'
 
     def count(self):
-        db = self.repository.get_data_source()[self.__get_repository_name()]
+        db = self.repository.get_data_source()[self.repository.collection_name]
         return db.count()
 
-    def find(self, skip = 0, top=50000000):
+    def find(self, skip=0, top=None):
+        if top == None:
+            top = self.count()
         data_source = self.repository.get_data_source()
-        customer_colls = data_source[self.__get_repository_name()]
+        customer_colls = data_source[self.repository.collection_name]
         customers = customer_colls.find()
 
         if skip != None:
