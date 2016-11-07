@@ -57,6 +57,7 @@ class UserUserCollaborativeFiltering:
         accuracies = []
 
         for k in xrange(1, self.__args.kfold + 1):
+            logger.info('TRAINING TEST FOLD %s ' % str(k))
             skip = int(k * divider)
             ## split the data
 
@@ -121,11 +122,12 @@ class UserUserCollaborativeFiltering:
         self.__dump_metrics(self.__metrics[test_fold_index])
 
     def __dump_metrics(self, metrics):
+        logger.info('------FINISHED------ \n ---METRICS---')
         for key in metrics.keys():
             avg_value = np.mean(metrics[key])
             std_value = np.std(metrics[key])
 
-            logging.info(key + ' mean = ' + str(avg_value) + ' standard deviation = ' + str(std_value))
+            logger.info(key + ' mean = ' + str(avg_value) + ' standard deviation = ' + str(std_value))
 
     def __get__most_voted_items(self, indexes, cf_matrix):
         items_votes = {}
@@ -149,7 +151,8 @@ class UserUserCollaborativeFiltering:
             else:
                 votes.append(0)
 
-        return votes
+        return np.array(votes, dtype=int)
+        # return items_votes.values()
 
     def calculate_metrics(self, indexes, expected_ratings, cf_matrix):
         metrics = {}

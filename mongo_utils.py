@@ -17,11 +17,15 @@ def load_data(customer_repository, item_repository, billing_repository):
     cf_matrix = init_cf_matrix(customer_repository=customer_repository, item_repository=item_repository)
 
     for target_document in documents:
-        rating = target_document.get('valorLiquido')
+        rating = round(target_document.get('valorLiquido'))
         customer_code = target_document.get('cliente').get('codigo')
-        item_code = hash(target_document.get('produto').get('codigo'))
+        item_code = target_document.get('produto').get('codigo')
 
-        if item_code in cf_matrix.columns:
-            cf_matrix.loc[customer_code][item_code] += int(rating)
+        cf_matrix.loc[customer_code][item_code] += int(rating)
 
+        if cf_matrix.loc[customer_code][item_code] > 0:
+            cf_matrix.loc[customer_code][item_code] = 1
+
+        else:
+            cf_matrix.loc[customer_code][item_code] = 0
     return cf_matrix
