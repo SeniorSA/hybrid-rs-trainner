@@ -7,7 +7,7 @@ def init_cf_matrix(customer_repository, item_repository):
     items = np.array(item_repository.get_items_code())
     items_count = len(items)
 
-    cf_matrix = pd.DataFrame(data=0 * items_count, index=customers, columns=items, dtype=float)
+    cf_matrix = pd.DataFrame(data=0 * items_count, index=customers, columns=items, dtype=int)
 
     return cf_matrix
 
@@ -18,13 +18,10 @@ def load_data(customer_repository, item_repository, billing_repository):
 
     for target_document in documents:
         rating = target_document.get('valorLiquido')
-        if rating > 0:
-            rating = 1
-        else:
-            rating = 0
         customer_code = target_document.get('cliente').get('codigo')
-        item_code = target_document.get('produto').get('codigo')
-        if item_code in cf_matrix.columns and customer_code in cf_matrix.index:
-            cf_matrix.loc[customer_code][item_code] += rating
+        item_code = hash(target_document.get('produto').get('codigo'))
+
+        if item_code in cf_matrix.columns:
+            cf_matrix.loc[customer_code][item_code] += int(rating)
 
     return cf_matrix
