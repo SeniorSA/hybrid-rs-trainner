@@ -68,6 +68,9 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         self.assertEqual(n2_c4.name, 'c4')
 
     def predict_customer_c9_items_test(self):
-        predicted = customer_c9_features = np.array([1, 1, 1, 0])
-        expected = np.array([1, 1, 0, 1])
-        self.assertTrue(predicted.all(), expected.all())
+        target_features = customer_c9_features = np.array([1, 1, 1, 0])
+        print self.cf_user_item.cf_matrix.columns
+        expected = np.array([1, 0, 1, 1])
+        predicted = self.cf_user_item.predict(target_features)
+
+        np.testing.assert_array_equal(expected, predicted)
