@@ -52,11 +52,9 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         self.cf_user_item.train()
 
     def it_should_use_only_5train_fold_test(self):
-        target_indexes = ['c10', 'c7', 'c6', 'c5', 'c4']
-        print target_indexes
-        indexes = [i for i in self.cf_user_item.cf_matrix.index]
-        print indexes
-        self.assertEqual(indexes, target_indexes)
+        target_indexes = np.array(['c10', 'c7', 'c6  ', 'c5', 'c4'])
+        indexes = np.array([i for i in self.cf_user_item.cf_matrix.index])
+        self.assertIn(indexes, target_indexes)
 
     def find_nearest_neghbor_c9__test(self):
         c9_features = [1, 1, 1, 0]

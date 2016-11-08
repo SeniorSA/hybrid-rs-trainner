@@ -57,6 +57,8 @@ class UserUserCollaborativeFiltering:
         accuracies = []
         training_folds = []
 
+        logger.info('\n---------------------------TRAINNING HAS STARTED---------------------------')
+
         for k in xrange(1, self.__args.kfold + 1):
             logger.info('TRAINING TEST FOLD %s ' % str(k))
             skip = int(k * divider)
@@ -90,7 +92,7 @@ class UserUserCollaborativeFiltering:
         best_fold_index = accuracies.index(max_accuracy)
         self.cf_matrix = trainning_folds[best_fold_index]
 
-        self.__dump_metrics(self.__metrics[best_fold_index])
+        self.__dump_metrics(self.__metrics, best_fold_index)
 
     def predict(self, predicting_features):
         if predicting_features == None or len(predicting_features) < len(self.cf_matrix.columns):
@@ -127,13 +129,19 @@ class UserUserCollaborativeFiltering:
         fold['median_absolute_error'].append(metrics['median_absolute_error'])
         fold['explained_variance_score'].append(metrics['explained_variance_score'])
 
-    def __dump_metrics(self, metrics):
-        logger.info('------FINISHED------ \n ---METRICS---')
-        for key in metrics.keys():
-            avg_value = np.mean(metrics[key])
-            std_value = np.std(metrics[key])
+    def __dump_metrics(self, metrics, best_fold_index):
+        logger.info('\n---------------------------METRICS---------------------------')
+        for i in xrange(len(self.__metrics)):
+            metrics = self.__metrics[i]
+            if i == best_fold_index:
+                logger.info('\n**BEST FOLD METRICS ' + str(i) + ' **')
+            else:
+                logger.info('\n**FOLD ' + str(i) + ' METRICS **')
+            for key in metrics.keys():
+                avg_value = np.mean(metrics[key])
+                std_value = np.std(metrics[key])
 
-            logger.info(key + ' mean = ' + str(avg_value) + ' standard deviation = ' + str(std_value))
+                logger.info(key + ' mean = ' + str(avg_value) + ' standard deviation = ' + str(std_value))
 
     def predict_based_upon_neighbors(self, indexes, cf_matrix):
         items_votes = {}
