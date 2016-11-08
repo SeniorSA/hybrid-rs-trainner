@@ -41,3 +41,10 @@ class MongoDatabaseTest(unittest.TestCase):
                          top_items=5
                          )
         return args
+
+#item_repository = ProdutoRepository(MongoProductionRepository(args=args))
+#from repository.mongo_production_repository import MongoProductionRepository
+from repository.faturamento_repository import FaturamentoRepository
+from repository.cliente_repository import  ClienteRepository
+from repository.produto_repository import ProdutoRepository
+from repository.generic_repository import GenericRepository

@@ -1,6 +1,6 @@
 from repository.generic_repository import GenericRepository
+from abc import ABCMeta
 
 
 class FaturamentoRepository(GenericRepository):
-    def test(self):
-        print 2
+    __metaclass__ = ABCMeta
