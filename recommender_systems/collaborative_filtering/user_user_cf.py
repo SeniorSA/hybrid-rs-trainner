@@ -35,7 +35,7 @@ class UserUserCollaborativeFiltering:
     def __init__(self, args, data):
         self.__validate_params(args, data)
         self.__args = args
-        self.data = data
+        self.cf_matrix = data
         self.list_index = list(data.index)
         self.__init_metrics()
 
@@ -52,9 +52,10 @@ class UserUserCollaborativeFiltering:
                                    'explained_variance_score': []})
 
     def train(self):
-        billing_count = len(self.data)
+        billing_count = len(self.cf_matrix)
         divider = float(billing_count) / self.__args.kfold
         accuracies = []
+        training_folds = []
 
         for k in xrange(1, self.__args.kfold + 1):
             logger.info('TRAINING TEST FOLD %s ' % str(k))
@@ -62,19 +63,42 @@ class UserUserCollaborativeFiltering:
             ## split the data
 
             first_index = int((k - 1) * divider)
-            test_sample = self.data.iloc[first_index:skip]
+            test_sample = self.cf_matrix.iloc[first_index:skip]
 
-            after = self.data.iloc[skip + 1:]
-            if first_index > 0:
-                before = self.data.iloc[:first_index - 1]
+            after = self.cf_matrix.iloc[skip:]
+            if first_index > 1:
+                before = self.cf_matrix.iloc[:first_index]
                 cf_target_sample = pd.concat([before, after])
 
             else:
                 cf_target_sample = after
 
+            training_folds.append(cf_target_sample)
             self.__calculate_neighbors_fold(test_sample, cf_target_sample, k)
 
-        self.__choose_best_fold()
+        self.__choose_best_fold(training_folds)
+
+    def __choose_best_fold(self, trainning_folds):
+        ##calculate the average accuracy
+        accuracies = []
+        for metric in self.__metrics:
+            acc = metric.get('accuracy_score')
+            accuracies.append(np.mean(acc))
+            # accuracy_std = np.std(acc)
+
+        max_accuracy = max(accuracies)
+        best_fold_index = accuracies.index(max_accuracy)
+        self.cf_matrix = trainning_folds[best_fold_index]
+
+        self.__dump_metrics(self.__metrics[best_fold_index])
+
+    def predict(self, predicting_features):
+        if predicting_features == None or len(predicting_features) < len(self.cf_matrix.columns):
+            raise Exception
+
+        distances, indexes = self.find_knn(target_matrix=self.cf_matrix, target_features=predicting_features)
+
+        return self.predict_based_upon_neighbors(indexes, self.cf_matrix)
 
     def __calculate_neighbors_fold(self, test_sample, cf_target_sample, index):
         for test_index in test_sample.index:
@@ -88,7 +112,7 @@ class UserUserCollaborativeFiltering:
             customer_index = self.list_index.index(test_index)
             neighbors_indexes = [i for i in neighbors_indexes[0] if i != customer_index]
 
-            metrics = self.calculate_metrics(neighbors_indexes, test_sample.loc[test_index].values, cf_target_sample)
+            metrics = self.calculate_metrics([neighbors_indexes], test_sample.loc[test_index].values, cf_target_sample)
             self.__handle_metrics(metrics, index)
 
     def __handle_metrics(self, metrics, index):
@@ -103,24 +127,6 @@ class UserUserCollaborativeFiltering:
         fold['median_absolute_error'].append(metrics['median_absolute_error'])
         fold['explained_variance_score'].append(metrics['explained_variance_score'])
 
-    def __choose_best_fold(self):
-        ##calculate the average accuracy
-        accuracies = []
-        for metric in self.__metrics:
-            acc = metric.get('accuracy_score')
-            accuracies.append(np.mean(acc))
-            # accuracy_std = np.std(acc)
-
-        max_accuracy = max(accuracies)
-        test_fold_index = accuracies.index(max_accuracy)
-
-        before_test_index = self.data.iloc[:test_fold_index]
-        after_test_index = self.data.iloc[test_fold_index + 1:]
-        full_data = pd.concat([before_test_index, after_test_index])
-        self.data = full_data
-
-        self.__dump_metrics(self.__metrics[test_fold_index])
-
     def __dump_metrics(self, metrics):
         logger.info('------FINISHED------ \n ---METRICS---')
         for key in metrics.keys():
@@ -129,16 +135,16 @@ class UserUserCollaborativeFiltering:
 
             logger.info(key + ' mean = ' + str(avg_value) + ' standard deviation = ' + str(std_value))
 
-    def __get__most_voted_items(self, indexes, cf_matrix):
+    def predict_based_upon_neighbors(self, indexes, cf_matrix):
         items_votes = {}
 
         # generate the items array with zero ratings
-        for item in self.data.columns:
+        for item in self.cf_matrix.columns:
             items_votes[item] = 0
 
         # for each neighbor in neighborhood, sum the items ratings that appears in the neighbor item sample (those who was rated by a neighbor)
-        for i in indexes:
-            item_ratings = self.data.iloc[i]
+        for i in indexes[0]:
+            item_ratings = self.cf_matrix.iloc[i]
 
             for item_key in item_ratings.index:
                 items_votes[item_key] += item_ratings[item_key]
@@ -157,7 +163,7 @@ class UserUserCollaborativeFiltering:
     def calculate_metrics(self, indexes, expected_ratings, cf_matrix):
         metrics = {}
         # get most voted items
-        predicted_ratings = self.__get__most_voted_items(indexes, cf_matrix)
+        predicted_ratings = self.predict_based_upon_neighbors(indexes, cf_matrix)
 
         recall, accuracy, precision, f1 = calculate_classification_metrics(expected_ratings, predicted_ratings)
         metrics['recall_score'] = recall
