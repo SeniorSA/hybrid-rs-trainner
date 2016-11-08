@@ -9,6 +9,18 @@ from mongo_utils import load_data
 from recommender_systems.collaborative_filtering.user_user_cf import UserUserCollaborativeFiltering
 
 
+/*
+
+
+"""
+    p1, p2, p3 , p4
+c1  34  35   0    0
+c2  25  12   0   10
+c3  13   0   0   0
+c4  22  17   0   231
+
+"""
+
 class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
     def it_should_pass_test(self):
         self.cf_user_item.train()
@@ -30,12 +42,3 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
                               billing_repository=billing_repository)
 
         self.cf_user_item = UserUserCollaborativeFiltering(self.mock_args(), cf_matrix)
-
-
-
-        # def it_should_return_most_vote_items_from_dict_test(self):
-        #     cf_user_item = self.set_up()
-        #     items = {'A': 3, 'B': 100, 'C': -2, 'D': 2000, 'E': 150, 'F': 50000, 'X': 1750, 'Y': 100000}
-        #     expected_items = ['Y', 'F', 'D', 'X', 'E']
-        #     voted_items = cf_user_item.vote(items)
-        #     self.assertEqual(expected_items, voted_items)
