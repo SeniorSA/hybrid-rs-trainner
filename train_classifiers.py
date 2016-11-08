@@ -1,5 +1,5 @@
 import argparse
-
+from sklearn.externals import joblib
 from recommender_systems.collaborative_filtering import UserUserCollaborativeFiltering
 
 parser = argparse.ArgumentParser(description='Recommender Systems trainner')
@@ -53,9 +53,9 @@ parser.add_argument('--weights', type=str, default='uniform',
 
 parser.add_argument('--mongo-database-url', help='mongo database url', default='localhost')
 parser.add_argument('--mongo-database-name', help='mongo database name', default='testando')
-parser.add_argument('--customer-collection-name', help='mongo customer collection name', default='clientesTeste')
-parser.add_argument('--item-collection-name', help='mongo item collection name', default='produtosTeste')
-parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamentoTeste')
+parser.add_argument('--customer-collection-name', help='mongo customer collection name', default='clientes')
+parser.add_argument('--item-collection-name', help='mongo item collection name', default='produtos')
+parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamentos')
 
 args = parser.parse_args()
 
@@ -74,3 +74,5 @@ cf_matrix = load_data(customer_repository, item_repository, billing_repository)
 
 user_user_cf = UserUserCollaborativeFiltering(args, cf_matrix)
 user_user_cf.train()
+joblib.dump(user_user_cf, 'user-user-knn.pkl')
+

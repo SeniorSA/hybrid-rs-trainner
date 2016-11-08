@@ -82,7 +82,7 @@ class UserUserCollaborativeFiltering:
             target_features_test = test_sample.loc[test_index].values
 
             # get the nearest neighbors
-            distances, neighbors_indexes = self.__find_knn(cf_target_sample, target_features_test)
+            distances, neighbors_indexes = self.find_knn(cf_target_sample, target_features_test)
 
             # asure that the array contains on index nearest neighbors indexes
             customer_index = self.list_index.index(test_index)
@@ -176,7 +176,7 @@ class UserUserCollaborativeFiltering:
     def get_metrics(self):
         return self.__metrics
 
-    def __find_knn(self, target_matrix, target_features):
+    def find_knn(self, target_matrix, target_features):
         neighbors = NearestNeighbors(n_neighbors=self.__args.n_neighbors, algorithm=self.__args.alg).fit(
             target_matrix.values)
         distances, indexes = neighbors.kneighbors(target_features)

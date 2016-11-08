@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from datetime import datetime
 
 
 def init_cf_matrix(customer_repository, item_repository):
@@ -13,6 +14,8 @@ def init_cf_matrix(customer_repository, item_repository):
 
 
 def load_data(customer_repository, item_repository, billing_repository):
+    data = datetime(2014, 07, 24)
+    #documents = billing_repository.find(None, None, {'data': {'$lt': data}})
     documents = billing_repository.find()
     cf_matrix = init_cf_matrix(customer_repository=customer_repository, item_repository=item_repository)
 
@@ -21,11 +24,12 @@ def load_data(customer_repository, item_repository, billing_repository):
         customer_code = target_document.get('cliente').get('codigo')
         item_code = target_document.get('produto').get('codigo')
 
-        cf_matrix.loc[customer_code][item_code] += int(rating)
+        if item_code in cf_matrix.loc[customer_code].index:
+            cf_matrix.loc[customer_code][item_code] += int(rating)
 
-        if cf_matrix.loc[customer_code][item_code] > 0:
-            cf_matrix.loc[customer_code][item_code] = 1
+            if cf_matrix.loc[customer_code][item_code] > 0:
+                cf_matrix.loc[customer_code][item_code] = 1
 
-        else:
-            cf_matrix.loc[customer_code][item_code] = 0
+            else:
+                cf_matrix.loc[customer_code][item_code] = 0
     return cf_matrix

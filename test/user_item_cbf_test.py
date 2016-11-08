@@ -11,14 +11,15 @@ from recommender_systems.collaborative_filtering.user_user_cf import UserUserCol
 
 class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
     def it_should_pass_test(self):
-        cf_user_item = self.set_up()
-        cf_user_item.train()
-        metrics = cf_user_item.get_metrics()
+        self.cf_user_item.train()
+        metrics = self.cf_user_item.get_metrics()
         accuracy = 0
 
         self.assertTrue(True)
 
-    def set_up(self):
+    def setUp(self):
+        super(UserItemCollaborativeFilteringTest, self).setUp()
+
         item_repository = ProdutoRepositoryMongo(self.repository_mock, self.repository_mock.args.item_collection_name)
         customer_repository = ClienteRepositoryMongo(self.repository_mock,
                                                      self.repository_mock.args.customer_collection_name)
@@ -28,7 +29,9 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         cf_matrix = load_data(customer_repository=customer_repository, item_repository=item_repository,
                               billing_repository=billing_repository)
 
-        return UserUserCollaborativeFiltering(self.mock_args(), cf_matrix)
+        self.cf_user_item = UserUserCollaborativeFiltering(self.mock_args(), cf_matrix)
+
+
 
         # def it_should_return_most_vote_items_from_dict_test(self):
         #     cf_user_item = self.set_up()

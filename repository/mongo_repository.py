@@ -13,17 +13,25 @@ class GenericMongoRepository(GenericRepository):
         db = self.repository.get_data_source()[self.repository.collection_name]
         return db.count()
 
-    def find(self, skip=0, top=None):
+    def find(self, skip=None, top=None, query=None):
         if top == None:
             top = self.count()
+
         data_source = self.repository.get_data_source()
         customer_colls = data_source[self.repository.collection_name]
-        customers = customer_colls.find()
+
+        documents = None
+
+        if query != None:
+            documents = customer_colls.find(query)
+
+        else:
+            documents = customer_colls.find()
 
         if skip != None:
-            customers.skip(skip)
+            documents.skip(skip)
 
         if top != None:
-            customers.limit(top)
+            documents.limit(top)
 
-        return customers
+        return documents
