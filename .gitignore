@@ -1,2 +1,5 @@
 .idea/
 *.pyc
+clientes.json
+import_recommendations.py
+user-user-knn.pkl
