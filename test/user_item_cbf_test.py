@@ -58,14 +58,23 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         print indexes
         self.assertEqual(indexes, target_indexes)
 
-    def find_nearest_neghbor_test(self):
-        features = [1, 1, 1, 0]
-        distances, indexes = self.cf_user_item.find_knn(self.cf_user_item.cf_matrix, features)
+    def find_nearest_neghbor_c9__test(self):
+        c9_features = [1, 1, 1, 0]
+        distances, indexes = self.cf_user_item.find_knn(self.cf_user_item.cf_matrix, c9_features)
         n1_c5 = self.cf_user_item.cf_matrix.iloc[indexes[0][0]]
         n2_c4 = self.cf_user_item.cf_matrix.iloc[indexes[0][1]]
 
         self.assertEqual(n1_c5.name, 'c5')
         self.assertEqual(n2_c4.name, 'c4')
+
+    def find_nearest_neghbor_c8_test(self):
+        c8_features = [1, 0, 1, 0]
+        distances, indexes = self.cf_user_item.find_knn(self.cf_user_item.cf_matrix, c8_features)
+        n1_c10 = self.cf_user_item.cf_matrix.iloc[indexes[0][0]]
+        n2_c7 = self.cf_user_item.cf_matrix.iloc[indexes[0][1]]
+
+        self.assertEqual(n1_c10.name, 'c5')
+        self.assertEqual(n2_c7.name, 'c4')
 
     def predict_customer_c9_items_test(self):
         target_features = customer_c9_features = np.array([1, 1, 1, 0])
