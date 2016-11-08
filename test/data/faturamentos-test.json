@@ -7,3 +7,13 @@
 {"_id":{"$oid":"5821c03e68302f3fd519136f"},"cliente":{"codigo":"c4"},"produto":{"codigo":"p1"},"valorLiquido":22.0}
 {"_id":{"$oid":"5821c03e68302f3fd5191370"},"cliente":{"codigo":"c4"},"produto":{"codigo":"p2"},"valorLiquido":17.0}
 {"_id":{"$oid":"5821c03e68302f3fd5191371"},"cliente":{"codigo":"c4"},"produto":{"codigo":"p4"},"valorLiquido":231.0}
+{"_id":{"$oid":"5821c92268302f3fd51913bc"},"cliente":{"codigo":"c5"},"produto":{"codigo":"p2"},"valorLiquido":66.0}
+{"_id":{"$oid":"5821c92268302f3fd51913bd"},"cliente":{"codigo":"c7"},"produto":{"codigo":"p1"},"valorLiquido":34.0}
+{"_id":{"$oid":"5821c92268302f3fd51913be"},"cliente":{"codigo":"c7"},"produto":{"codigo":"p4"},"valorLiquido":92.0}
+{"_id":{"$oid":"5821c92268302f3fd51913bf"},"cliente":{"codigo":"c8"},"produto":{"codigo":"p1"},"valorLiquido":14.0}
+{"_id":{"$oid":"5821c92268302f3fd51913c0"},"cliente":{"codigo":"c8"},"produto":{"codigo":"p3"},"valorLiquido":68.0}
+{"_id":{"$oid":"5821c92268302f3fd51913c1"},"cliente":{"codigo":"c9"},"produto":{"codigo":"p1"},"valorLiquido":88.0}
+{"_id":{"$oid":"5821c92268302f3fd51913c2"},"cliente":{"codigo":"c9"},"produto":{"codigo":"p2"},"valorLiquido":54.0}
+{"_id":{"$oid":"5821c92268302f3fd51913c3"},"cliente":{"codigo":"c9"},"produto":{"codigo":"p3"},"valorLiquido":50.0}
+{"_id":{"$oid":"5821c92268302f3fd51913c4"},"cliente":{"codigo":"c10"},"produto":{"codigo":"p3"},"valorLiquido":58.0}
+{"_id":{"$oid":"5821c92268302f3fd51913c5"},"cliente":{"codigo":"c10"},"produto":{"codigo":"p4"},"valorLiquido":58.0}
