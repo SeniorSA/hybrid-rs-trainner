@@ -1,7 +1,5 @@
-{"_id":{"$oid":"581cc995cda3e83bbac21c15"},"codigo":"1670"}
-{"_id":{"$oid":"581cc995cda3e83bbac21c1a"},"codigo":"1602"}
-{"_id":{"$oid":"581cc995cda3e83bbac21c1b"},"codigo":"1647"}
-{"_id":{"$oid":"581cc995cda3e83bbac21c1c"},"codigo":"1713"}
-{"_id":{"$oid":"581cc995cda3e83bbac21c23"},"codigo":"1610"}
-{"_id":{"$oid":"581cc995cda3e83bbac21c24"},"codigo":"1623"}
-{"_id":{"$oid":"581cc995cda3e83bbac21c25"},"codigo":"1718"}
+{"_id":{"$oid":"581cc995cda3e83bbac21c15"},"codigo":"c1"}
+{"_id":{"$oid":"581cc995cda3e83bbac21c1a"},"codigo":"c2"}
+{"_id":{"$oid":"581cc995cda3e83bbac21c1b"},"codigo":"c3"}
+{"_id":{"$oid":"581cc995cda3e83bbac21c1c"},"codigo":"c4"}
+
