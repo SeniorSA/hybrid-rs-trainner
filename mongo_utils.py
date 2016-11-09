@@ -15,8 +15,8 @@ def init_cf_matrix(customer_repository, item_repository):
 
 def load_data(customer_repository, item_repository, billing_repository):
     data = datetime(2014, 07, 24)
-    #documents = billing_repository.find(None, None, {'data': {'$lt': data}})
-    documents = billing_repository.find()
+    count = billing_repository.count()
+    documents = billing_repository.find(0, count, {'data': {'$lt': data}})
     logger.info('*INITIALIZING CF MATRIX*')
     cf_matrix = init_cf_matrix(customer_repository=customer_repository, item_repository=item_repository)
     logger.info('*CF MATRIX INITIALIZING COMPLETED* \*LOADING BILLINGS DATA*')
