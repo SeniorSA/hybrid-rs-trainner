@@ -1,6 +1,7 @@
 from os.path import join, dirname
 import logging
 from collections import OrderedDict
+import time
 
 import numpy as np
 import pandas as pd
@@ -11,7 +12,11 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 # create a file handler
-handler = logging.FileHandler('user_user_cf.log')
+current_time = time.localtime(time.time())
+log_name = 'user_user_cf-' + str(current_time.tm_mday) + '-' + str(current_time.tm_mon) + '-' + str(
+    current_time.tm_year) + '-' + str(current_time.tm_hour) + '-' + str(current_time.tm_min) + '-' + str(
+    current_time.tm_sec) + '.log'
+handler = logging.FileHandler(log_name)
 handler.setLevel(logging.DEBUG)
 
 streamHandler = logging.StreamHandler()
@@ -51,16 +56,26 @@ class UserUserCollaborativeFiltering:
                                    'median_absolute_error': [],
                                    'explained_variance_score': []})
 
+    def __dump_args(self):
+        logger.info('\n----------------- TRAINNING WITH PARAMS ----------------- ')
+        logger.info('--alg %s' % self.__args.alg)
+        logger.info('--n-neighbors %i' % self.__args.n_neighbors)
+        logger.info('--kfold %i' % self.__args.kfold)
+        logger.info('--distance-metric %s' % self.__args.distance_metric)
+        logger.info('--p %i' % self.__args.p)
+        logger.info('--leaf-size %i' % self.__args.leaf_size)
+        logger.info('--weights %s' % self.__args.weights)
+
     def train(self):
         billing_count = len(self.cf_matrix)
         divider = float(billing_count) / self.__args.kfold
         accuracies = []
         training_folds = []
 
-        logger.info('\n---------------------------TRAINNING HAS STARTED---------------------------')
+        self.__dump_args()
 
         for k in xrange(1, self.__args.kfold + 1):
-            logger.info('TRAINING TEST FOLD %s ' % str(k))
+            logger.info('\n*************** TRAINING TEST FOLD ***************%s ' % str(k))
             skip = int(k * divider)
             ## split the data
 
@@ -130,7 +145,7 @@ class UserUserCollaborativeFiltering:
         fold['explained_variance_score'].append(metrics['explained_variance_score'])
 
     def __dump_metrics(self, metrics, best_fold_index):
-        logger.info('\n---------------------------METRICS---------------------------')
+        logger.info('\n-------******* METRICS -------*******')
         for i in xrange(len(self.__metrics)):
             metrics = self.__metrics[i]
             if i == best_fold_index:
