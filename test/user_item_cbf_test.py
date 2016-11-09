@@ -1,9 +1,9 @@
 from unittest import TestCase
 from mongo_base_test import MongoDatabaseTest
 
-from repository.cliente_repository_mongo import ClienteRepositoryMongo
-from repository.produto_repository_mongo import ProdutoRepositoryMongo
-from repository.faturamento_repository_mongo import FaturamentoRepositoryMongo
+from repository.cliente_repository import ClienteRepositoryMongo
+from repository.produto_repository import ProdutoRepositoryMongo
+from repository.faturamento_repository import FaturamentoRepositoryMongo
 from mongo_utils import load_data
 
 from recommender_systems.collaborative_filtering.user_user_cf import UserUserCollaborativeFiltering

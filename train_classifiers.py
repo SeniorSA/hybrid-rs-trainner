@@ -2,9 +2,9 @@ import argparse
 from sklearn.externals import joblib
 from recommender_systems.collaborative_filtering import UserUserCollaborativeFiltering
 
-from repository.cliente_repository_mongo import ClienteRepositoryMongo
-from repository.produto_repository_mongo import ProdutoRepositoryMongo, ProdutoRepository
-from repository.faturamento_repository_mongo import FaturamentoRepositoryMongo
+from repository.cliente_repository import ClienteRepositoryMongo
+from repository.produto_repository import ProdutoRepositoryMongo, ProdutoRepository
+from repository.faturamento_repository import FaturamentoRepositoryMongo
 from repository.mongo_production_repository import MongoProductionRepository
 from repository.mongo_repository import GenericMongoRepository
 from mongo_utils import load_data
