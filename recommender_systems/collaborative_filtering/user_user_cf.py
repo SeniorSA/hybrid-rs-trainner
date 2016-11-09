@@ -2,7 +2,6 @@ from os.path import join, dirname
 import logging
 from collections import OrderedDict
 import time
-from sklearn.externals import joblib
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
