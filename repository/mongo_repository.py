@@ -13,7 +13,7 @@ class GenericMongoRepository(GenericRepository):
         db = self.repository.get_data_source()[self.repository.collection_name]
         return db.count()
 
-    def find(self, skip=None, top=None, query=None):
+    def find(self, skip=0, top=None, query=None):
         if top == None:
             top = self.count()
 
