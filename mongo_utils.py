@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime
-
+from recommender_systems.collaborative_filtering.user_user_cf import  logger
 
 def init_cf_matrix(customer_repository, item_repository):
     customers = np.array(customer_repository.get_customers_code())
@@ -17,7 +17,9 @@ def load_data(customer_repository, item_repository, billing_repository):
     data = datetime(2014, 07, 24)
     #documents = billing_repository.find(None, None, {'data': {'$lt': data}})
     documents = billing_repository.find()
+    logger.info('*INITIALIZING CF MATRIX*')
     cf_matrix = init_cf_matrix(customer_repository=customer_repository, item_repository=item_repository)
+    logger.info('*CF MATRIX INITIALIZING COMPLETED* \*LOADING BILLINGS DATA*')
 
     for target_document in documents:
         rating = round(target_document.get('valorLiquido'))
@@ -32,4 +34,6 @@ def load_data(customer_repository, item_repository, billing_repository):
 
             else:
                 cf_matrix.loc[customer_code][item_code] = 0
+
+    logger.info('*CF MATRIX INITIALIZING AND COMPUTE RATING COMPLETED*')
     return cf_matrix
