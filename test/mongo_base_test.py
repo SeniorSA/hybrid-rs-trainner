@@ -38,13 +38,14 @@ class MongoDatabaseTest(unittest.TestCase):
                          customer_collection_name='clientes', item_collection_name='produtos',
                          billing_collection_name='faturamentos', weighs='uniform', leaf_size=30,
                          p=2, n_neighbors=2, kfold=2, alg='brute', distance_metric='euclidean',
-                         top_items=5
+                         top_items=5, weights=20
                          )
         return args
 
-#item_repository = ProdutoRepository(MongoProductionRepository(args=args))
-#from repository.mongo_production_repository import MongoProductionRepository
+
+# item_repository = ProdutoRepository(MongoProductionRepository(args=args))
+# from repository.mongo_production_repository import MongoProductionRepository
 from repository.faturamento_repository import FaturamentoRepository
-from repository.cliente_repository import  ClienteRepository
+from repository.cliente_repository import ClienteRepository
 from repository.produto_repository import ProdutoRepository
 from repository.generic_repository import GenericRepository

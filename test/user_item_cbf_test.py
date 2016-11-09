@@ -46,7 +46,7 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
                                                         self.repository_mock.args.billing_collection_name)
 
         cf_matrix = load_data(customer_repository=customer_repository, item_repository=item_repository,
-                              billing_repository=billing_repository)
+                              billing_repository=billing_repository, use_date_threshold=False)
 
         self.cf_user_item = UserUserCollaborativeFiltering(self.mock_args(), cf_matrix)
         self.cf_user_item.train()
@@ -76,7 +76,6 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
 
     def predict_customer_c9_items_test(self):
         target_features = customer_c9_features = np.array([1, 1, 1, 0])
-        print self.cf_user_item.cf_matrix.columns
         expected = np.array([1, 0, 1, 1])
         predicted = self.cf_user_item.predict(target_features)
 

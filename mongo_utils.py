@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 from datetime import datetime
-from recommender_systems.collaborative_filtering.user_user_cf import  logger
+from recommender_systems.collaborative_filtering.user_user_cf import logger
+
 
 def init_cf_matrix(customer_repository, item_repository):
     customers = np.array(customer_repository.get_customers_code())
@@ -13,10 +14,17 @@ def init_cf_matrix(customer_repository, item_repository):
     return cf_matrix
 
 
-def load_data(customer_repository, item_repository, billing_repository):
+def load_data(customer_repository, item_repository, billing_repository, use_date_threshold=True):
     data = datetime(2014, 07, 24)
     count = billing_repository.count()
-    documents = billing_repository.find(0, count, {'data': {'$lt': data}})
+    documents = None
+
+    if use_date_threshold is True:
+        documents = billing_repository.find(0, count, {'data': {'$lt': data}})
+
+    else:
+        documents = billing_repository.find()
+
     logger.info('*INITIALIZING CF MATRIX*')
     cf_matrix = init_cf_matrix(customer_repository=customer_repository, item_repository=item_repository)
     logger.info('*CF MATRIX INITIALIZING COMPLETED* \*LOADING BILLINGS DATA*')

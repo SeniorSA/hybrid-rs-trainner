@@ -2,7 +2,7 @@ from os.path import join, dirname
 import logging
 from collections import OrderedDict
 import time
-
+from sklearn.externals import joblib
 import numpy as np
 import pandas as pd
 from sklearn.neighbors import NearestNeighbors
@@ -13,10 +13,10 @@ logger.setLevel(logging.DEBUG)
 
 # create a file handler
 current_time = time.localtime(time.time())
-log_name = 'user_user_cf-' + str(current_time.tm_mday) + '-' + str(current_time.tm_mon) + '-' + str(
+file_name = 'user_user_cf_knn-' + str(current_time.tm_mday) + '-' + str(current_time.tm_mon) + '-' + str(
     current_time.tm_year) + '-' + str(current_time.tm_hour) + '-' + str(current_time.tm_min) + '-' + str(
-    current_time.tm_sec) + '.log'
-handler = logging.FileHandler(log_name)
+    current_time.tm_sec)
+handler = logging.FileHandler(file_name + '.log')
 handler.setLevel(logging.DEBUG)
 
 streamHandler = logging.StreamHandler()
@@ -108,6 +108,10 @@ class UserUserCollaborativeFiltering:
         self.cf_matrix = trainning_folds[best_fold_index]
 
         self.__dump_metrics(self.__metrics, best_fold_index)
+
+        logger.info('---STARTING MODEL PERSISTENCE---')
+        joblib.dump(self, file_name + '.pkl')
+        logger.info('---FINISHED MODEL PERSISTENCE--')
 
     def predict(self, predicting_features):
         if predicting_features == None or len(predicting_features) < len(self.cf_matrix.columns):
