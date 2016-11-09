@@ -2,6 +2,14 @@ import argparse
 from sklearn.externals import joblib
 from recommender_systems.collaborative_filtering import UserUserCollaborativeFiltering
 
+from repository.cliente_repository_mongo import ClienteRepositoryMongo
+from repository.produto_repository_mongo import ProdutoRepositoryMongo, ProdutoRepository
+from repository.faturamento_repository_mongo import FaturamentoRepositoryMongo
+from repository.mongo_production_repository import MongoProductionRepository
+from repository.mongo_repository import GenericMongoRepository
+from mongo_utils import load_data
+from recommender_systems.collaborative_filtering.user_user_cf import logger, file_name
+
 parser = argparse.ArgumentParser(description='Recommender Systems trainner')
 
 parser.add_argument('--kfold', help='the number o fold to stratify using k-fold cross-validation', type=float,
@@ -37,13 +45,14 @@ parser.add_argument('--alg', help='The KNN implementation algorithm. There are f
                                   'brute - will use a brute-force search.\n'
                                   'auto - will attempt to decide the most appropriate algorithm based on the values passed to fit method',
                     default='brute', type=str)
-parser.add_argument('--n-neighbors', help='define the n nearest neighbors', type=int, default=5)
-parser.add_argument('--top-items', help='define the top items (or users) rated by similar users (items)', default=10,
+parser.add_argument('--n-neighbors', help='define the n nearest neighbors', type=int, default=10)
+parser.add_argument('--top-items', help='define the top items (or users) rated by similar users (items)', default=2500,
                     type=int)
 parser.add_argument('--p', default=2, type=int,
                     help='Power parameter for the Minkowski metric. When p = 1, this is equivalent to using manhattan_distance (l1), and euclidean_distance (l2) for p = 2. For arbitrary p, minkowski_distance (l_p) is used.')
 parser.add_argument('--leaf-size', type=int, default=30,
-                    help='Leaf size passed to BallTree or KDTree. This can affect the speed of the construction and query, as well as the memory required to store the tree. The optimal value depends on the nature of the problem.')
+                    help='Leaf size passed to BallTree or KDTree. This can affect the speed of the construction and query, as well as the memory required to store the tree. '
+                         'The optimal value depends on the nature of the problem.')
 parser.add_argument('--weights', type=str, default='uniform',
                     help='weight function used in prediction. '
                          'Possible values: "uniform" : uniform weights. '
@@ -55,16 +64,9 @@ parser.add_argument('--mongo-database-url', help='mongo database url', default='
 parser.add_argument('--mongo-database-name', help='mongo database name', default='testando')
 parser.add_argument('--customer-collection-name', help='mongo customer collection name', default='clientes')
 parser.add_argument('--item-collection-name', help='mongo item collection name', default='produtos')
-parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamentos')
+parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamentoTeste')
 
 args = parser.parse_args()
-
-from repository.cliente_repository_mongo import ClienteRepositoryMongo
-from repository.produto_repository_mongo import ProdutoRepositoryMongo, ProdutoRepository
-from repository.faturamento_repository_mongo import FaturamentoRepositoryMongo
-from repository.mongo_production_repository import MongoProductionRepository
-from repository.mongo_repository import GenericMongoRepository
-from mongo_utils import load_data
 
 item_repository = ProdutoRepositoryMongo(MongoProductionRepository(args), args.item_collection_name)
 billing_repository = FaturamentoRepositoryMongo(MongoProductionRepository(args), args.billing_collection_name)
@@ -74,5 +76,7 @@ cf_matrix = load_data(customer_repository, item_repository, billing_repository)
 
 user_user_cf = UserUserCollaborativeFiltering(args, cf_matrix)
 user_user_cf.train()
-joblib.dump(user_user_cf, 'user-user-knn.pkl')
 
+logger.info('---STARTING MODEL PERSISTENCE---')
+joblib.dump(cf_matrix, file_name + '.pkl')
+logger.info('---FINISHED MODEL PERSISTENCE--')

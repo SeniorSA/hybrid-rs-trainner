@@ -109,10 +109,6 @@ class UserUserCollaborativeFiltering:
 
         self.__dump_metrics(self.__metrics, best_fold_index)
 
-        logger.info('---STARTING MODEL PERSISTENCE---')
-        joblib.dump(self, file_name + '.pkl')
-        logger.info('---FINISHED MODEL PERSISTENCE--')
-
     def predict(self, predicting_features):
         if predicting_features == None or len(predicting_features) < len(self.cf_matrix.columns):
             raise Exception
