@@ -1,9 +1,8 @@
 import json
 import unittest
-from abc import ABCMeta
 from argparse import Namespace
 
-from repository.mongo_mock_repository import MongoMockRepository
+from test.mongo_mock_repository import MongoMockRepository
 
 
 class MongoDatabaseTest(unittest.TestCase):
@@ -45,7 +44,3 @@ class MongoDatabaseTest(unittest.TestCase):
 
 # item_repository = ProdutoRepository(MongoProductionRepository(args=args))
 # from repository.mongo_production_repository import MongoProductionRepository
-from repository.faturamento_repository import FaturamentoRepository
-from repository.cliente_repository import ClienteRepository
-from repository.produto_repository import ProdutoRepository
-from repository.generic_repository import GenericRepository

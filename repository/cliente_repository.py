@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABCMeta
-from generic_repository import GenericRepository
+from mongo_repository import *
 from repository.mongo_repository import GenericMongoRepository
 
 

@@ -1,6 +1,6 @@
 from unittest import TestCase
 from mongo_base_test import MongoDatabaseTest
-
+import unittest
 from repository.cliente_repository import ClienteRepositoryMongo
 from repository.produto_repository import ProdutoRepositoryMongo
 from repository.faturamento_repository import FaturamentoRepositoryMongo
@@ -29,7 +29,7 @@ it should choose the second fold (k=2)
 """
 
 
-class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
+class UserUserCollaborativeFilteringTest(MongoDatabaseTest):
     def it_should_pass_test(self):
         metrics = self.cf_user_item.get_metrics()
         accuracy = 0
@@ -37,7 +37,7 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         self.assertTrue(True)
 
     def setUp(self):
-        super(UserItemCollaborativeFilteringTest, self).setUp()
+        super(UserUserCollaborativeFilteringTest, self).setUp()
 
         item_repository = ProdutoRepositoryMongo(self.repository_mock, self.repository_mock.args.item_collection_name)
         customer_repository = ClienteRepositoryMongo(self.repository_mock,
@@ -80,3 +80,6 @@ class UserItemCollaborativeFilteringTest(MongoDatabaseTest):
         predicted = self.cf_user_item.predict(target_features)
 
         np.testing.assert_array_equal(expected, predicted)
+
+if __name__ == '__main__':
+    unittest.main()

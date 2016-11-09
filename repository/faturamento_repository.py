@@ -1,7 +1,5 @@
-from repository.generic_repository import GenericRepository
-from repository.mongo_repository import GenericMongoRepository
+from repository.mongo_repository import *
 from abc import ABCMeta
-
 
 
 class FaturamentoRepository(GenericRepository):

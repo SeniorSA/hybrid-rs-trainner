@@ -1,6 +1,5 @@
 from abc import abstractmethod
-from repository.generic_repository import GenericRepository
-from repository.mongo_repository import GenericMongoRepository
+from repository.mongo_repository import *
 
 class ProdutoRepository(GenericRepository):
     @abstractmethod
