@@ -8,17 +8,26 @@ Desse modo, é possível fazer recomendações de eventos (seja item, filme, ou 
 possível gerar recomendações para novos eventos)
 para usuários (também será possível gerar recomendações para novos usuários).
 
-## O que é Filtragem Colaborativa?
-É uma das taxonomias (bem comum) utilizadas para distinguir os Sistemas de Recomendação. A premissa básica por trás da filtragem colaborativa é a de que se um usuário `u1` é semelhante a um usuário `u2`, então pode-se gerar recomendações para o usuário `u2` com base no usuário `u1`.
+## O que é Colaborative Filtering (CF)?
+É uma das taxonomias (bem comum) utilizadas para distinguir os Sistemas de Recomendação. A premissa básica por trás da CF é a de que se um usuário `u1` é semelhante a um usuário `u2`, então pode-se gerar recomendações para o usuário `u2` com base no usuário `u1`.
 
 Para explicar melhor, imagina-se a seguinte situação:
+ - Usuário `u1` tem 18 anos e solteiro
+ - Usuário `u2` tem 33 anos e é casado
+ - Usuário `u3` tem 21 anos e é solteiro
+ - Usuário `u4` tem 45 anos e é casado
  
- - Um usuário `u1` assiste os filmes `Mercenários`, `Mercenários 2`,  `Mercenários 3` e `Atração Perigosa`
- - Um usuário `u2` assiste os filmes `Mercenários`, `Mercenários 2`, `American PIE` e `Velozes e Furiosos`
- - Um usuário `u3` assiste os filmes `Homens de Honra`, `Mercenários 2`, `Mercenários 3`, `Atração Perigosa`
+ - `u1` assiste os filmes `Mercenários`, `Mercenários 2`,  `Mercenários 3` e `Atração Perigosa`, `Rambo`
+ - `u2` assiste os filmes `Mercenários`, `Mercenários 2`, `American PIE` e `Velozes e Furiosos`, `Se beber, não case`
+ - `u3` assiste os filmes `American PIE`, `Mercenários 2`, `Mercenários 3`, `Atração Perigosa`
+ - `u4` não assiste nenhum filme
  
-Fica claro que o `u3` é semelhante ao `u1`, pois eles assistiram 3 filmes iguais. Seguindo a premissa da filtragem colaborativa, um dos filmes recomendados para o usuário `u3` seria `Mercenários`. 
- 
+Fica claro que o `u3` é semelhante ao `u1`, pois eles __assistiram 3 filmes iguais__. Seguindo a premissa da CF, um dos filmes recomendados para o usuário `u3` seria `Mercenários`. 
+
+## O que é Content-Based Filterging (CBF)?
+Assim como a CF é uma taxonomia para distinguir os Sistemas de Recomendação. Esta, por sua vez, faz o estudo de ténicas para gerar recomendações para usuários com base nas características dos mesmos.
+Geralmente é utilizada quando não há informações colaborativas (diga-se coletivas) a respeito de um item ou usuário, já que, estas geralmente são mais efetivas (para gerar recomendações) do que as anteriores.
+Desse modo, para `u4` seria recomendado os filmes que `u2`assistiu, pois o `u2` é o mais mais semelhante ao `u4`.
 
 ## Como funciona?
 
