@@ -114,7 +114,11 @@ class UserUserCollaborativeFiltering:
 
         distances, indexes = self.find_knn(target_matrix=self.cf_matrix, target_features=predicting_features)
 
-        return self.predict_based_upon_neighbors(indexes, self.cf_matrix)
+        predicting_features = self.predict_based_upon_neighbors(indexes, self.cf_matrix)
+
+        predicting_features, b = self.__binarize(predicting_features)
+
+        return predicting_features
 
     def __calculate_neighbors_fold(self, test_sample, cf_target_sample, index):
         for test_index in test_sample.index:
@@ -172,21 +176,21 @@ class UserUserCollaborativeFiltering:
                 items_votes[item_key] += item_ratings[item_key]
 
         # return self.vote(items_votes, len(self.data.columns))
-        votes = []
-        for i in items_votes.values():
-            if i > 0:
-                votes.append(1)
-            else:
-                votes.append(0)
+        # votes = []
+        # for i in items_votes.values():
+        #     if i > 0:
+        #         votes.append(1)
+        #     else:
+        #         votes.append(0)
 
-        return np.array(votes, dtype=int)
-        # return items_votes.values()
+        return np.array(items_votes.values(), dtype=int)
 
     def calculate_metrics(self, indexes, expected_ratings, cf_matrix):
         metrics = {}
         # get most voted items
         predicted_ratings = self.predict_based_upon_neighbors(indexes, cf_matrix)
 
+        expected_ratings, predicted_ratings = self.__binarize(expected_ratings, predicted_ratings)
         recall, accuracy, precision, f1 = calculate_classification_metrics(expected_ratings, predicted_ratings)
         metrics['recall_score'] = recall
         metrics['accuracy_score'] = accuracy
@@ -200,6 +204,21 @@ class UserUserCollaborativeFiltering:
         metrics['explained_variance_score'] = evs
 
         return metrics
+
+    def __binarize(self, a, b=None):
+        for i in xrange(len(a)):
+            if a[i] > 0:
+                a[i] = 1
+            else:
+                a[i] = 0
+
+            if b is not None:
+                if b[i] > 0:
+                    b[i] = 1
+                else:
+                    b[i] = 0
+
+        return a, b
 
     def get_metrics(self):
         return self.__metrics

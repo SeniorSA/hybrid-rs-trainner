@@ -37,11 +37,11 @@ def load_data(customer_repository, item_repository, billing_repository, use_date
         if item_code in cf_matrix.loc[customer_code].index:
             cf_matrix.loc[customer_code][item_code] += int(rating)
 
-            if cf_matrix.loc[customer_code][item_code] > 0:
-                cf_matrix.loc[customer_code][item_code] = 1
-
-            else:
-                cf_matrix.loc[customer_code][item_code] = 0
+            # if cf_matrix.loc[customer_code][item_code] > 0:
+            #     cf_matrix.loc[customer_code][item_code] = 1
+            #
+            # else:
+            #     cf_matrix.loc[customer_code][item_code] = 0
 
     logger.info('*CF MATRIX INITIALIZING AND COMPUTE RATING COMPLETED*')
     return cf_matrix
