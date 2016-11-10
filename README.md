@@ -29,6 +29,9 @@ Assim como a CF é uma taxonomia para distinguir os Sistemas de Recomendação. 
 Geralmente é utilizada quando não há informações colaborativas (diga-se coletivas) a respeito de um item ou usuário, já que, estas geralmente são mais efetivas (para gerar recomendações) do que as anteriores.
 Desse modo, para `u4` seria recomendado os filmes que `u2`assistiu, pois o `u2` é o mais mais semelhante ao `u4`.
 
+## O que é Hybrid Filtering?
+Os Sistemas de Recomendação Híbridos fazem uso tanto de técnicas presentes em CF, quanto em CBF. Na verdade, na maioria das vezes, tomam-se como prioridade as técnicas utilizadas na CF, e caso não haja informações a respeito (usuário ou item novo) utilizam-se técnicas de CBF.
+
 ## Como funciona?
 
 
