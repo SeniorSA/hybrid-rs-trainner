@@ -6,4 +6,11 @@ Essse repositório contém um conjunto de scripts com a finalidade de treinar um
 
 Desse modo, é possível fazer recomendações de eventos (seja item, filme, ou whatever. Isso depende da modelagem) conhecidos (no futuro será 
 possível gerar recomendações para novos eventos)
-para usuários (também será possível gerar recomendações para novos usuários)
+para usuários (também será possível gerar recomendações para novos usuários).
+
+## Como funciona?
+
+
+## Algoritmos Suportados
+  * KNarest Neighborh (instance-based ou lazy learning)
+  
