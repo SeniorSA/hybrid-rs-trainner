@@ -109,7 +109,7 @@ class UserUserCollaborativeFiltering:
         self.__dump_metrics(self.__metrics, best_fold_index)
 
     def predict(self, predicting_features):
-        if predicting_features == None or len(predicting_features) < len(self.cf_matrix.columns):
+        if predicting_features is None or len(predicting_features) < len(self.cf_matrix.columns):
             raise Exception
 
         distances, indexes = self.find_knn(target_matrix=self.cf_matrix, target_features=predicting_features)

@@ -45,7 +45,7 @@ parser.add_argument('--alg', help='The KNN implementation algorithm. There are f
                                   'brute - will use a brute-force search.\n'
                                   'auto - will attempt to decide the most appropriate algorithm based on the values passed to fit method',
                     default='brute', type=str)
-parser.add_argument('--n-neighbors', help='define the n nearest neighbors', type=int, default=10)
+parser.add_argument('--n-neighbors', help='define the n nearest neighbors', type=int, default=12)
 parser.add_argument('--top-items', help='define the top items (or users) rated by similar users (items)', default=2500,
                     type=int)
 parser.add_argument('--p', default=2, type=int,
@@ -64,7 +64,7 @@ parser.add_argument('--mongo-database-url', help='mongo database url', default='
 parser.add_argument('--mongo-database-name', help='mongo database name', default='testando')
 parser.add_argument('--customer-collection-name', help='mongo customer collection name', default='clientes')
 parser.add_argument('--item-collection-name', help='mongo item collection name', default='produtos')
-parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamentoTeste')
+parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamentos')
 
 args = parser.parse_args()
 
@@ -78,5 +78,5 @@ user_user_cf = UserUserCollaborativeFiltering(args, cf_matrix)
 user_user_cf.train()
 
 logger.info('---STARTING MODEL PERSISTENCE---')
-joblib.dump(cf_matrix, file_name + '.pkl')
+joblib.dump(user_user_cf, file_name + '.pkl')
 logger.info('---FINISHED MODEL PERSISTENCE--')
