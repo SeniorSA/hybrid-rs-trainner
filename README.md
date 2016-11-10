@@ -40,4 +40,4 @@ Para um cliente `c` encontram-se os `k`vizinhos mais próximos com base no fatur
 ## Como o algoritmo funciona?
 Nessa primeira versão é realizada CF com base nos faturamentos (cliente `c` comprou item `i`).
 
-Utilizam-se as implementações da técnica do vizinho mais próximo (KNN) disponíveis na biblioteca do [`scikit-learn`](http://scikit-learn.org/stable/modules/neighbors.html), juntamente com seus parâmetros,
+Utilizam-se as implementações da técnica do vizinho mais próximo (KNN) disponíveis na biblioteca do [scikit-learn](http://scikit-learn.org/stable/modules/neighbors.html), juntamente com seus parâmetros,
