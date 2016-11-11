@@ -67,7 +67,8 @@ Em alguns casos, foi tratado com o uso de técnicas de
  - Raciocínio Baseado em Caso
 
 ## Preparação do ambiente
-Conforme mecionado anteriormente, esta library faz uso dos algoritmos presentes no scikit-learn, portanto, ela foi escrita em Python. Para executar o projeto, basta instalar a versão o Python 2.7.12 e adicionar o no Path da máquina - durante o desenvolvimetno deste projeto foi utilizado Anaconda 4.1.1 -, em seguida basta digitar o segunite comando no console `pip install -r [endereço do arquivo requirements que se encontra no diretório raíz do projeto]`
+Conforme mecionado anteriormente, esta library faz uso dos algoritmos presentes no scikit-learn, portanto, ela foi escrita em Python. Para executar o projeto, basta instalar a versão o Python 2.7.12 e adicionar o no Path da máquina - durante o desenvolvimetno deste projeto foi utilizado Anaconda 4.1.1 -, em seguida basta digitar o segunite comando no console:
+   `pip install -r [endereço do arquivo requirements que se encontra no diretório raíz do projeto]`
 
 ## Sobre a library
 O objetivo desse projeto é fornecer um conjunto de scripts e implementações para treinar diferentes engines de Sistemas de Recomendação (CF, CBF ou híbrido) with zero zode :)
