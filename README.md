@@ -22,11 +22,12 @@ Fica claro que o `u3` é semelhante ao `u1`, pois eles __assistiram 3 filmes igu
 
 ## O que é Content-Based Filterging (CBF)?
 Assim como a CF é uma taxonomia para distinguir os Sistemas de Recomendação. Esta, por sua vez, faz o estudo de ténicas para gerar recomendações para usuários com base nas características dos mesmos.
-Geralmente é utilizada quando não há informações colaborativas (diga-se coletivas) a respeito de um item ou usuário, já que, estas geralmente são mais efetivas (para gerar recomendações) do que as anteriores.
-Desse modo, para `u4` seria recomendado os filmes que `u2`assistiu, pois o `u2` é o mais mais semelhante ao `u4`.
+Geralmente é utilizada quando não há informações colaborativas (diga-se coletivas) a respeito de um item ou usuário. Desse modo, para `u4` seria recomendado os filmes que `u2` assistiu, pois __com base nas características dos usuários__ (idade e estado civil) o `u2` é o mais mais semelhante ao `u4`
 
 ## O que é Hybrid Filtering?
 Os Sistemas de Recomendação Híbridos fazem uso tanto de técnicas presentes em CF, quanto em CBF. Na verdade, na maioria das vezes, tomam-se como prioridade as técnicas utilizadas na CF, e caso não haja informações a respeito (usuário ou item novo) utilizam-se técnicas de CBF.
+
+Assim, um Sistema de Recomendação Híbrido seria capaz de gerar recomendações para todos os usuários disponíveis (`u1`, `u2`, `u3`, `u4`). Para o `u3`, por exemplo, seria recomendado `Mercenários`, e para o `u4` seria recomendado os filmes que o `u2` assistiu. Os Híbridos geralmente (almost like everything, não é há convenção na literatura) geram suas recomendações com base nas técnicas de CF, pois estas são mais efetivas (geramente), e caso não haja informações colaborativas, então usam-se técnicas de CBF.
 
 ## Como funciona?
 
