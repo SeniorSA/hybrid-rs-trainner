@@ -45,14 +45,13 @@ Na verdade, o problema de recomendação tem sido tratamento como problema de ag
 Para um cliente `c` encontram-se os `k`vizinhos mais próximos com base no faturamento. 
 
 ## Como o algoritmo funciona?
-Nessa primeira versão é realizada CF com base nos faturamentos (cliente `c` comprou item `i`).
 
-``` Mercenários | Mercenários 2 | Mercenários 3 | Atração Perigosa | Rambo | American PIE | Se beber, não case | Velozes e Furiosos
- u1     1       |       1       |       1       |         1        |   1   |       0      |          0         |         0
- u2     1       |       1       |       0       |         0        |   0   |       1      |          1         |         1
- u3     0       |       1       |       1       |         1        |   0   |       1      |          0         |         0
- u4     0       |       0       |       0       |         0        |   0   |       0      |          0         |         0
-```
+[Mercenários | Mercenários 2 | Mercenários 3 | Atração Perigosa | Rambo | American PIE | Se beber, não case | Velozes e Furiosos]
+ [u1     1       |       1       |       1       |         1        |   1   |       0      |          0         |         0]
+ [u2     1       |       1       |       0       |         0        |   0   |       1      |          1         |         1]
+ [u3     0       |       1       |       1       |         1        |   0   |       1      |          0         |         0]
+ [u4     0       |       0       |       0       |         0        |   0   |       0      |          0         |         0]
+
 
 Utilizam-se as implementações da técnica do vizinho mais próximo (KNN) disponíveis na biblioteca do [scikit-learn](http://scikit-learn.org/stable/modules/neighbors.html), juntamente com seus parâmetros,
 
