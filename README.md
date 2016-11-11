@@ -41,3 +41,14 @@ Para um cliente `c` encontram-se os `k`vizinhos mais próximos com base no fatur
 Nessa primeira versão é realizada CF com base nos faturamentos (cliente `c` comprou item `i`).
 
 Utilizam-se as implementações da técnica do vizinho mais próximo (KNN) disponíveis na biblioteca do [scikit-learn](http://scikit-learn.org/stable/modules/neighbors.html), juntamente com seus parâmetros,
+
+## REFERÊNCIAS
+ * [Recommender systems survey](http://romisatriawahono.net/lecture/rm/survey/information%20retrieval/Bobadilla%20-%20Recommender%20Systems%20-%202013.pdf)
+ * [An Empirical Analysis of Design Choices in Neighborhood](https://www.researchgate.net/profile/Jon_Herlocker/publication/226021885_An_Empirical_Analysis_of_Design_Choices_in_Neighborhood-Based_Collaborative_Filtering_Algorithms/links/00b7d539756e3b1c49000000.pdf)
+ * [Recommender Systems Handbook]()
+ * [Recommendation Systems](http://infolab.stanford.edu/~ullman/mmds/ch9.pdf)
+ * [Similarity and recommender systems](http://www.inf.ed.ac.uk/teaching/courses/inf2b/learnnotes/inf2b-learn-note02-2up.pdf)
+ * [Semi-Supervised Learning for Personalized Web Recommender](http://cai.type.sk/content/2010/4/semi-supervised-lear\ning-for-personalized-web-recommender-system/11052.pdf)
+ * [Learning From Labeled And Unlabeled Data: An Empirical Study Across Techniques And Domains](https://www.jair.org/media/1509/live-1509-2348-jair.pdf)
+ * [Is trust robuts? An Analysis of Trust-Based Recommendation](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.476.7184&rep=rep1&type=pdf)
+ 
