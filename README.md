@@ -17,11 +17,11 @@ Treine suas engines de recomendação with zero code! :)
 * [Referências](#referências)
 * [License](#license)
 
-## Sistemas de Recomendação
+## Sistemas de Recomendação 
 
 Essse repositório contém um conjunto de scripts com a finalidade de treinar um Sistema de Recomendação Híbrido -Collaborative Filtering (CF) e Content-Based Filtering (CBF)- genérico o suficiente para fazer recomendações para de itens para usuários (conhecidos ou novos). 
 
-### Colaborative Filtering 
+### Collaborative Filtering
 É uma das taxonomias (bastante comum) utilizadas para distinguir os Sistemas de Recomendação. A premissa básica por trás da CF é a de que se um usuário `u1` é semelhante a um usuário `u2` com base em conteúdo colaborativo, então pode-se gerar recomendações para o usuário `u2` com base no usuário `u1`.
 
 Para explicar melhor, imagina-se a seguinte situação:
@@ -37,11 +37,11 @@ Para explicar melhor, imagina-se a seguinte situação:
  - `u4` assiste os filmes `Mercenários`, `Mercenários 3` e `Atração Perigosa`, `Rambo`, `American PIE, `Se beber, não case`, `Velozes e Furiosos`
  - `u5` não assiste nenhum filme (novo)
  
-Fica claro que o `u3` é semelhante ao `u1`, pois eles __assistiram 3 filmes iguais__. Seguindo a premissa da CF, um dos filmes recomendados para o usuário `u3` seria `Mercenários`. 
+Fica claro que o `u3` é semelhante ao `u1`, pois eles __assistiram 3 filmes iguais__. Seguindo a premissa da CF, um dos filmes recomendados para o usuário `u3` seria `Mercenários`.
 
 ### Content-Based Filtering
 Assim como a CF é uma taxonomia para distinguir os Sistemas de Recomendação. Esta, por sua vez, faz o estudo de ténicas para gerar recomendações para usuários com base nas características dos mesmos.
-Geralmente é utilizada quando não há informações colaborativas (diga-se coletivas) a respeito de um item ou usuário. Desse modo, para `u4` seria recomendado os filmes que `u2` assistiu, pois __com base nas características dos usuários__ (idade e estado civil) o `u2` é o mais mais semelhante ao `u4`
+Geralmente é utilizada quando não há informações colaborativas (diga-se coletivas) a respeito de um item ou usuário. Desse modo, para `u4` seria recomendado os filmes que `u2` assistiu, pois __com base nas características dos usuários__ (idade e estado civil) o `u2` é o mais mais semelhante ao `u4`.
 
 ### Hybrid Filtering
 Os Sistemas de Recomendação Híbridos fazem uso tanto de técnicas presentes em CF, quanto em CBF. Na verdade, na maioria das vezes, tomam-se como prioridade as técnicas utilizadas na CF, e caso não haja informações a respeito (usuário ou item novo) utilizam-se técnicas de CBF.
