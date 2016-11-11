@@ -54,10 +54,10 @@ Em alguns casos, foi tratado com o uso de técnicas de
   * KNarest Neighborh (instance-based ou lazy learning)
   
 ## Como é gerado uma recomendação?
-Para um cliente `c` encontram-se os `k`vizinhos mais próximos com base no faturamento. 
+Para um cliente `c` encontram-se os `k` vizinhos mais próximos com base no faturamento. 
 
 ## Como o algoritmo funciona?
-Atualmente é suportado a recomendação baseada em filtragem colaborativa de usuário para usuário (User-User Collaborative Filtering). Para tal, cria-se uma matriz (a matriz foi binarizada por questões didáticas) onde as linhas são os usuários e as colunas os filmes. Se o usuário `u` assistiu o filme `f`, então o valor é 1. Do contrário é zero (não assistiu). Portanto, será criado uma matriz de ordem usuários x filmes.
+Atualmente é suportado a recomendação baseada em filtragem colaborativa de usuário para usuário (User-User Collaborative Filtering). Para tal, cria-se uma matriz (a matriz foi binarizada por questões didáticas) onde as linhas são os usuários e as colunas os filmes. Se o usuário `u` assistiu o filme `f`, então o valor é 1. Do contrário é zero (não assistiu). Portanto, será criado uma matriz de ordem `usuários x filmes`.
 
 O treinamento do algoritmo ocorre com o cálculo da distância de cada usuário em relação os outros. O cálculo é feito pela implementação escolhida do algoritmo KNN. Para fazer a predição (recomendação) é feito o cálculo dos k vizinhos mais próximos, e então é realizado a união entre as características (se o filme foi assistido ou não) desses vizinhos e então é gerado a recomendação (união das características dos k vizinhos).
 
@@ -72,13 +72,14 @@ A matriz está ilustrada abaixo:
 
 Assim, usando o algoritmo com as configurações padrões e k=2, as recomendações para o `u4` seriam:
 
-D(u4, u1) = 4
-D(u4, u2) = 4
-D(u4, u3) = 5
+    D(u4, u1) = 4
+    D(u4, u2) = 4
+    D(u4, u3) = 5
 
-Os k=2 vizinhos mais próximos são `u1` e  `u2`, logo as recomendações serão a união (nesssa library está implementado como união, porém no futur, será implementado outras estratégias, como por exemplo recomendar somente os filmes que possuem maior frequência - modas) das características desses vizinhos:
-Recomendações = 
-   
+Os `k=2` vizinhos mais próximos são `u1` e  `u2`, logo as recomendações serão a união (nesssa library está implementado como união, porém no futur, será implementado outras estratégias, como por exemplo recomendar somente os filmes que possuem maior frequência - modas) das características desses vizinhos:
+
+    Recomendações = 
+    
     Mercenários | Mercenários 2 | Mercenários 3 | Atração Perigosa | Rambo | American PIE | Se beber, não case | Velozes e Furiosos  
         1       |       1       |       1       |         1        |   1   |       1      |          1         |         1
 
@@ -94,7 +95,7 @@ Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `
  - --p [inteiro definindo a potência utilizada para fazer o cálculo da distância] [mais informações](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
 
 Após o término do treinamento, será escolhido a versão com as melhores métricas e será salvo em disco. O nome do arquivo será `user_user_cf_knn-[dia-mes-ano-hora-minuto-segundo].pkl`.
-Além disso, também será gerado um log com o nome `user_user_cf_knn-[dia-mes-ano-hora-minuto-segundo].log` contendo as métricas coletadas durante o treinamento dos k modelos (kfolds).
+Além disso, também será gerado um log com o nome `user_user_cf_knn-[dia-mes-ano-hora-minuto-segundo].log` contendo as métricas coletadas durante o treinamento dos `k` modelos (kfolds).
 
 
 ## REFERÊNCIAS
