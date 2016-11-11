@@ -13,6 +13,8 @@ Treine suas engines de recomendação with zero code! :)
   * [Features pendentes](#features-pendentes)
   * [Funcionando do algoritmo](#funcionando-do-algoritmo)
   * [Como fazer o treinamento do algoritmo](#como-fazer-o-treinamento-do-algoritmo)
+* [Referências](#referências)
+* [License](#license)
 
 ## Sistemas de Recomendação
 
