@@ -1,8 +1,8 @@
 # hybrid-rs-trainner #
 
-##Afinal, do que se trata esse repositório?
+## Afinal, do que se trata esse repositório?
 
-Essse repositório contém um conjunto de scripts com a finalidade de treinar um Sistema de Recomendação Híbrido -Collaborative Filtering (CF) e Content-Based Filtering (CBF)- genérico o suficiente para fazer recomendações para de itens para usuários (conhecidos ou novos).  
+Essse repositório contém um conjunto de scripts com a finalidade de treinar um Sistema de Recomendação Híbrido -Collaborative Filtering (CF) e Content-Based Filtering (CBF)- genérico o suficiente para fazer recomendações para de itens para usuários (conhecidos ou novos). 
 
 ## O que é Colaborative Filtering (CF)?
 É uma das taxonomias (bastante comum) utilizadas para distinguir os Sistemas de Recomendação. A premissa básica por trás da CF é a de que se um usuário `u1` é semelhante a um usuário `u2` com base em conteúdo colaborativo, então pode-se gerar recomendações para o usuário `u2` com base no usuário `u1`.
@@ -50,13 +50,17 @@ Em alguns casos, foi tratado com o uso de técnicas de
  - Sistemas Especialistas
  - Raciocínio Baseado em Caso
 
-## Algoritmos Suportados
-  * KNarest Neighborh (instance-based ou lazy learning)
-  
-## Como é gerado uma recomendação?
-Para um cliente `c` encontram-se os `k` vizinhos mais próximos com base no faturamento. 
+## Sobre a library
+O objetivo desse projeto é fornecer um conjunto de scripts e implementações para treinar diferentes engines de Sistemas de Recomendação (CF, CBF ou híbrido) with zero zode :)
 
-## Como o algoritmo funciona?
+No momento essa library só suporta User-User Collaborative Filtering - uma matriz de usuários x itens, onde cada célula representa um rating de um usuário para um item -. As recomendações são geradas observando a __similaridade entre os usuários__.
+
+No futuro será adicionada a features User-Item Collaborative Filtering - cria-se uma matriz de item x item, onde cada célula armazena a similaridade de um item `i1`com um `i2`. Nesse caso, para gerar as predições de `i1`, percorre-se a matriz e toma-se as recomendações dos itens mais semelhantes.
+
+### Algoritmos Suportados
+  * KNarest Neighborh (instance-based ou lazy learning)
+
+### Como o algoritmo funciona?
 Atualmente é suportado a recomendação baseada em filtragem colaborativa de usuário para usuário (User-User Collaborative Filtering). Para tal, cria-se uma matriz (a matriz foi binarizada por questões didáticas) onde as linhas são os usuários e as colunas os filmes. Se o usuário `u` assistiu o filme `f`, então o valor é 1. Do contrário é zero (não assistiu). Portanto, será criado uma matriz de ordem `usuários x filmes`.
 
 O treinamento do algoritmo ocorre com o cálculo da distância de cada usuário em relação os outros. O cálculo é feito pela implementação escolhida do algoritmo KNN. Para fazer a predição (recomendação) é feito o cálculo dos k vizinhos mais próximos, e então é realizado a união entre as características (se o filme foi assistido ou não) desses vizinhos e então é gerado a recomendação (união das características dos k vizinhos).
@@ -83,7 +87,7 @@ Os `k=2` vizinhos mais próximos são `u1` e  `u2`, logo as recomendações ser�
     Mercenários | Mercenários 2 | Mercenários 3 | Atração Perigosa | Rambo | American PIE | Se beber, não case | Velozes e Furiosos  
         1       |       1       |       1       |         1        |   1   |       1      |          1         |         1
 
-## Como fazer o treinamento do algoritmo?
+### Como fazer o treinamento do algoritmo?
 Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Os parâmetros disponíveis são:
  - --distance-metric [metrica escolhida]. As métricas estão disponíveis [aqui](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html)
  - --kfold [inteiro descrevendo o número de folds usado na validação cruzada] 
