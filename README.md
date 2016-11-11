@@ -30,7 +30,7 @@ Geralmente é utilizada quando não há informações colaborativas (diga-se col
 ## O que é Hybrid Filtering?
 Os Sistemas de Recomendação Híbridos fazem uso tanto de técnicas presentes em CF, quanto em CBF. Na verdade, na maioria das vezes, tomam-se como prioridade as técnicas utilizadas na CF, e caso não haja informações a respeito (usuário ou item novo) utilizam-se técnicas de CBF.
 
-Assim, um Sistema de Recomendação Híbrido seria capaz de gerar recomendações para todos os usuários disponíveis (`u1`, `u2`, `u3`, `u4`). Para o `u3`, por exemplo, seria recomendado `Mercenários`, e para o `u4` seria recomendado os filmes que o `u2` assistiu. Os Híbridos geralmente (almost like everything, não é há convenção na literatura) geram suas recomendações com base nas técnicas de CF, pois estas são mais efetivas (geramente), e caso não haja informações colaborativas, então usam-se técnicas de CBF.
+Assim, um Sistema de Recomendação Híbrido seria capaz de gerar recomendações para todos os usuários disponíveis (`u1`, `u2`, `u3`, `u4`). Para o `u3`, por exemplo, seria recomendado `Mercenários`, e para o `u5` seria recomendado os filmes que o `u2` assistiu. Os Híbridos geralmente (almost like everything, não é há convenção na literatura) geram suas recomendações com base nas técnicas de CF, pois estas são mais efetivas (geramente), e caso não haja informações colaborativas, então usam-se técnicas de CBF.
 
 ## Qual é a principal diferença entre essas taxonomias?
 Diferentes técnicas de Inteligência Artificial (IA) são utilizadas para tratar esses problemas - em alguns casos é utilizado a mesma técnica em CF e CBF. O exemplo mais clássico disso é o uso de algoritmo KNearestNeighbor -.
@@ -39,7 +39,16 @@ A principal distinção entre elas está no uso dos dados para gerar as recomend
 ## Como definir qual técnica utilizar para treinar o modelo e gerar as recomendações?
 Evidentemente não há uma solução para comum para todos os casos. Cada problema é um problema, e como tal, deve ser tratado de forma singular. Portanto, para determinar qual técnica é melhor para um conjunto de dados (domínio), deve-se fazer uma análise dos dados e posteriormente a elaboração e validação de hipóteses.
 
-Na verdade, o problema de recomendação tem sido tratamento como problema de agrupamento, etc. -, como problema de classificação, como problema de regressão, como problema de regras de associação
+Algumas das estratégias mais comuns para tratar o problemas de recomendação são:
+ - Agrupamento
+ - Classificação
+ - Regressão
+ - Com combinações das técnicas acima
+
+Em alguns casos, foi tratado com o uso de técnicas de
+ - Problema de Satisfação de Restrição (PSR)
+ - Sistemas Especialistas
+ - Raciocínio Baseado em Caso
 
 ## Algoritmos Suportados
   * KNarest Neighborh (instance-based ou lazy learning)
