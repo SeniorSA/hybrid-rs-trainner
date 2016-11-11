@@ -43,8 +43,17 @@ Nessa primeira versão é realizada CF com base nos faturamentos (cliente `c` co
 Utilizam-se as implementações da técnica do vizinho mais próximo (KNN) disponíveis na biblioteca do [scikit-learn](http://scikit-learn.org/stable/modules/neighbors.html), juntamente com seus parâmetros,
 
 ## Como fazer o treinamento do algoritmo?
-Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Para visualizar os parâmetros, basta abrir o arquivo `train_classifier.py`.
-
+Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Os parâmetros disponíveis são:
+ - --distance-metric [metrica escolhida]  
+  * As métricas estão disponíveis [aqui](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html)
+ - --kfold [inteiro descrevendo o número de folds usado na validação cruzada] 
+ - --alg [o algoritmo utilizado para fazer o cálculo dos k vizinhos mais próxixos] disponível [em](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
+ - --n-neighbors [inteiro descrevendo o número de vizinhos mais próximos]
+ - --top-items [número descrevendo o número dos top items para um usuário de acordo com sua relevância] (AINDA NÃO É SUPORTADO)
+ - --leaf-size [inteiro que determina o número de nó folhas utilizado na poda] default: 30. Parâmetro só é utilizado quando quando --alg=kn_tree ou --alg=ball_tree
+ - --weights [string definindo a função de peso utilizada na predição] default: 'uniform'. [Mais informações](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
+ - --p [inteiro definindo a potência utilizada para fazer o cálculo da distância] [mais informações](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
+ 
 Se for nas configurações padrões (sem alterar os parâmetros), a implementação da técnica do vizinho mais próximo utilizada será a 'brute'. A métrica de distância será a menor distância entre dois pontos (distância euclidiana), o número de vizinho será 12 e o número de estraticações utilizada para fazer a validação cruzada será igual a 10.
 
 Após o término do treinamento, será escolhido a versão com as melhores métricas e será salvo em disco. O nome do arquivo será `user_user_cf_knn-[dia-mes-ano-hora-minuto-segundo].pkl`.
