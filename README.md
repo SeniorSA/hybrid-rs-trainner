@@ -44,8 +44,7 @@ Utilizam-se as implementações da técnica do vizinho mais próximo (KNN) dispo
 
 ## Como fazer o treinamento do algoritmo?
 Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Os parâmetros disponíveis são:
- - --distance-metric [metrica escolhida]  
-  * As métricas estão disponíveis [aqui](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html)
+ - --distance-metric [metrica escolhida]. As métricas estão disponíveis [aqui](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html)
  - --kfold [inteiro descrevendo o número de folds usado na validação cruzada] 
  - --alg [o algoritmo utilizado para fazer o cálculo dos k vizinhos mais próxixos] disponível [em](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
  - --n-neighbors [inteiro descrevendo o número de vizinhos mais próximos]
