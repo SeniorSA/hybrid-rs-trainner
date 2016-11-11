@@ -9,6 +9,10 @@ Treine suas engines de recomendação with zero code! :)
   * [Diferenças entre essas taxonomias](#diferenças-entre-essas-taxonomias)
   * [Escolha de técnicas para gerar recomendações](#escolha-de-técnicas-para-gerar-recomendações)
 * [Sobre a library](#sobre-a-library)
+  * [Features suportadas](#features-suportadas)
+  * [Features pendentes](#features-pendentes)
+  * [Funcionando do algoritmo](#funcionando-do-algoritmo)
+  * [Como fazer o treinamento do algoritmo](#como-fazer-o-treinamento-do-algoritmo)
 
 ## Sistemas de Recomendação
 
@@ -59,7 +63,7 @@ Em alguns casos, foi tratado com o uso de técnicas de
  - Sistemas Especialistas
  - Raciocínio Baseado em Caso
 
-### Sobre a library
+## Sobre a library
 O objetivo desse projeto é fornecer um conjunto de scripts e implementações para treinar diferentes engines de Sistemas de Recomendação (CF, CBF ou híbrido) with zero zode :)
 
 No momento essa library só suporta User-User Collaborative Filtering - uma matriz de usuários x itens, onde cada célula representa um rating de um usuário para um item -. As recomendações são geradas observando a __similaridade entre os usuários__.
@@ -75,14 +79,14 @@ Além disso, as seguintes técnicas serão suportados:
 ### Features suportadas
  * KNN (instance-based ou lazy learning) User User Collaborative Filtering 
 
-### Features que serão adicionadas
+### Features pendentes
  * KNN (instance-based ou lazy learning) User Item Collaborative Filtering 
  * KNN CBF
  * Algoritmos de classificação
  * Algoritmos de regressão
  * Outros algoritmos de agrupamento  
 
-### Como o algoritmo funciona?
+### Funcionando do algoritmo
 Atualmente é suportado a recomendação baseada em filtragem colaborativa de usuário para usuário (User-User Collaborative Filtering). Para tal, cria-se uma matriz (a matriz foi binarizada por questões didáticas) onde as linhas são os usuários e as colunas os filmes. Se o usuário `u` assistiu o filme `f`, então o valor é 1. Do contrário é zero (não assistiu). Portanto, será criado uma matriz de ordem `usuários x filmes`.
 
 O treinamento do algoritmo ocorre com o cálculo da distância de cada usuário em relação os outros. O cálculo é feito pela implementação escolhida do algoritmo KNN. Para fazer a predição (recomendação) é feito o cálculo dos k vizinhos mais próximos, e então é realizado a união entre as características (se o filme foi assistido ou não) desses vizinhos e então é gerado a recomendação (união das características dos k vizinhos).
@@ -109,7 +113,7 @@ Os `k=2` vizinhos mais próximos são `u1` e  `u2`, logo as recomendações ser�
     Mercenários | Mercenários 2 | Mercenários 3 | Atração Perigosa | Rambo | American PIE | Se beber, não case | Velozes e Furiosos  
         1       |       1       |       1       |         1        |   1   |       1      |          1         |         1
 
-### Como fazer o treinamento do algoritmo?
+### Como fazer o treinamento do algoritmo
 Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Os parâmetros disponíveis são:
  - --distance-metric [metrica escolhida]. As métricas estão disponíveis [aqui](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html)
  - --kfold [inteiro descrevendo o número de folds usado na validação cruzada] 
