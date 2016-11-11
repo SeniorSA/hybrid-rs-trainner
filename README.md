@@ -57,8 +57,21 @@ No momento essa library só suporta User-User Collaborative Filtering - uma matr
 
 No futuro será adicionada a features User-Item Collaborative Filtering - cria-se uma matriz de item x item, onde cada célula armazena a similaridade de um item `i1`com um `i2`. Nesse caso, para gerar as predições de `i1`, percorre-se a matriz e toma-se as recomendações dos itens mais semelhantes.
 
-### Algoritmos Suportados
-  * KNarest Neighborh (instance-based ou lazy learning)
+Além disso, as seguintes técnicas serão suportados:
+ - classificação
+ - regressão
+ - outros algoritmos de agrupamento
+ - e a combinação destes
+
+### Features suportadas
+ * KNN (instance-based ou lazy learning) User User Collaborative Filtering 
+
+### Features que serão adicionadas
+ * KNN (instance-based ou lazy learning) User Item Collaborative Filtering 
+ * KNN CBF
+ * Algoritmos de classificação
+ * Algoritmos de regressão
+ * Outros algoritmos de agrupamento  
 
 ### Como o algoritmo funciona?
 Atualmente é suportado a recomendação baseada em filtragem colaborativa de usuário para usuário (User-User Collaborative Filtering). Para tal, cria-se uma matriz (a matriz foi binarizada por questões didáticas) onde as linhas são os usuários e as colunas os filmes. Se o usuário `u` assistiu o filme `f`, então o valor é 1. Do contrário é zero (não assistiu). Portanto, será criado uma matriz de ordem `usuários x filmes`.
