@@ -59,11 +59,9 @@ Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `
  - --leaf-size [inteiro que determina o número de nó folhas utilizado na poda] default: 30. Parâmetro só é utilizado quando quando --alg=kn_tree ou --alg=ball_tree
  - --weights [string definindo a função de peso utilizada na predição] default: 'uniform'. [Mais informações](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
  - --p [inteiro definindo a potência utilizada para fazer o cálculo da distância] [mais informações](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
- 
-Se for nas configurações padrões (sem alterar os parâmetros), a implementação da técnica do vizinho mais próximo utilizada será a 'brute'. A métrica de distância será a menor distância entre dois pontos (distância euclidiana), o número de vizinho será 12 e o número de estraticações utilizada para fazer a validação cruzada será igual a 10.
 
 Após o término do treinamento, será escolhido a versão com as melhores métricas e será salvo em disco. O nome do arquivo será `user_user_cf_knn-[dia-mes-ano-hora-minuto-segundo].pkl`.
-Além disso, também será gerado um log com as métricas coletadas durante o treinamento dos k modelos (kfolds).
+Além disso, também será gerado um log com o nome `user_user_cf_knn-[dia-mes-ano-hora-minuto-segundo].log` contendo as métricas coletadas durante o treinamento dos k modelos (kfolds).
 
 
 ## REFERÊNCIAS
