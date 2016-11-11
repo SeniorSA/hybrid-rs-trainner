@@ -5,7 +5,7 @@
 Essse repositório contém um conjunto de scripts com a finalidade de treinar um Sistema de Recomendação Híbrido -Collaborative Filtering (CF) e Content-Based Filtering (CBF)- genérico o suficiente para fazer recomendações para de itens para usuários (conhecidos ou novos).  
 
 ## O que é Colaborative Filtering (CF)?
-É uma das taxonomias (bem comum) utilizadas para distinguir os Sistemas de Recomendação. A premissa básica por trás da CF é a de que se um usuário `u1` é semelhante a um usuário `u2`, então pode-se gerar recomendações para o usuário `u2` com base no usuário `u1`.
+É uma das taxonomias (bastante comum) utilizadas para distinguir os Sistemas de Recomendação. A premissa básica por trás da CF é a de que se um usuário `u1` é semelhante a um usuário `u2` com base em conteúdo colaborativo, então pode-se gerar recomendações para o usuário `u2` com base no usuário `u1`.
 
 Para explicar melhor, imagina-se a seguinte situação:
  - Usuário `u1` tem 18 anos e solteiro
@@ -13,7 +13,7 @@ Para explicar melhor, imagina-se a seguinte situação:
  - Usuário `u3` tem 21 anos e é solteiro
  - Usuário `u4` tem 19 anos e é casado
  - Usuário `u5` tem 45 anos e é casado
- 
+ -------------------------------------------------------------------------------------------------
  - `u1` assiste os filmes `Mercenários`, `Mercenários 2`,  `Mercenários 3` e `Atração Perigosa`, `Rambo`
  - `u2` assiste os filmes `Mercenários`, `Mercenários 2`, `American PIE` e `Velozes e Furiosos`, `Se beber, não case`
  - `u3` assiste os filmes `American PIE`, `Mercenários 2`, `Mercenários 3`, `Atração Perigosa`
