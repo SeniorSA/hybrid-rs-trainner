@@ -29,8 +29,9 @@ Os Sistemas de Recomendação Híbridos fazem uso tanto de técnicas presentes e
 
 Assim, um Sistema de Recomendação Híbrido seria capaz de gerar recomendações para todos os usuários disponíveis (`u1`, `u2`, `u3`, `u4`). Para o `u3`, por exemplo, seria recomendado `Mercenários`, e para o `u4` seria recomendado os filmes que o `u2` assistiu. Os Híbridos geralmente (almost like everything, não é há convenção na literatura) geram suas recomendações com base nas técnicas de CF, pois estas são mais efetivas (geramente), e caso não haja informações colaborativas, então usam-se técnicas de CBF.
 
-## Como funciona?
-
+## Qual é a principal diferença entre essas taxonomias?
+Diferentes técnicas de Inteligência Artificial (IA) são utilizadas para tratar esses problemas - em alguns casos é utilizado a mesma técnica em CF e CBF. O exemplo mais clássico disso é o uso de algoritmo KNearestNeighbor -.
+A principal distinção entre elas está no uso dos dados para gerar as recomendações - CF usa dados colaborativos para determinar a similaridade e gerar recomendações com base nos itens ou usuários mais similares, enquanto que CBF usa dados individuais para determinar as recomendações para os itens ou usuários mais similares -.
 
 ## Algoritmos Suportados
   * KNarest Neighborh (instance-based ou lazy learning)
