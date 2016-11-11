@@ -67,6 +67,7 @@ parser.add_argument('--item-collection-name', help='mongo item collection name',
 parser.add_argument('--billing-collection-name', help='mongo billing collection name', default='faturamentos')
 
 args = parser.parse_args()
+print args
 
 item_repository = ProdutoRepositoryMongo(MongoProductionRepository(args), args.item_collection_name)
 billing_repository = FaturamentoRepositoryMongo(MongoProductionRepository(args), args.billing_collection_name)
