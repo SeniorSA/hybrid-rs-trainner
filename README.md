@@ -13,7 +13,8 @@ Para explicar melhor, imagina-se a seguinte situação:
  - Usuário `u3` tem 21 anos e é solteiro
  - Usuário `u4` tem 19 anos e é casado
  - Usuário `u5` tem 45 anos e é casado
- -------------------------------------------------------------------------------------------------
+ 
+ 
  - `u1` assiste os filmes `Mercenários`, `Mercenários 2`,  `Mercenários 3` e `Atração Perigosa`, `Rambo`
  - `u2` assiste os filmes `Mercenários`, `Mercenários 2`, `American PIE` e `Velozes e Furiosos`, `Se beber, não case`
  - `u3` assiste os filmes `American PIE`, `Mercenários 2`, `Mercenários 3`, `Atração Perigosa`
