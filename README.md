@@ -45,6 +45,11 @@ Na verdade, o problema de recomendação tem sido tratamento como problema de ag
 Para um cliente `c` encontram-se os `k`vizinhos mais próximos com base no faturamento. 
 
 ## Como o algoritmo funciona?
+Atualmente é suportado a recomendação baseada em filtragem colaborativa de usuário para usuário (User-User Collaborative Filtering). Para tal, cria-se uma matriz (a matriz foi binarizada por questões didáticas) onde as linhas são os usuários e as colunas os filmes. Se o usuário `u` assistiu o filme `f`, então o valor é 1. Do contrário é zero (não assistiu). Portanto, será criado uma matriz de ordem usuários x filmes.
+
+O treinamento do algoritmo ocorre com o cálculo da distância de cada usuário em relação os outros. O cálculo é feito pela implementação escolhida do algoritmo KNN. Para fazer a predição (recomendação) é feito o cálculo dos k vizinhos mais próximos, e então é realizado a união entre as características (se o filme foi assistido ou não) desses vizinhos e então é gerado a recomendação (união das características dos k vizinhos).
+
+A matriz está ilustrada abaixo:
 
        Mercenários | Mercenários 2 | Mercenários 3 | Atração Perigosa | Rambo | American PIE | Se beber, não case | Velozes e Furiosos
     u1     1       |       1       |       1       |         1        |   1   |       0      |          0         |         0
@@ -52,8 +57,6 @@ Para um cliente `c` encontram-se os `k`vizinhos mais próximos com base no fatur
     u3     0       |       1       |       1       |         1        |   0   |       1      |          0         |         0
     u4     0       |       0       |       0       |         0        |   0   |       0      |          0         |         0
 
-
-Utilizam-se as implementações da técnica do vizinho mais próximo (KNN) disponíveis na biblioteca do [scikit-learn](http://scikit-learn.org/stable/modules/neighbors.html), juntamente com seus parâmetros,
 
 ## Como fazer o treinamento do algoritmo?
 Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Os parâmetros disponíveis são:
