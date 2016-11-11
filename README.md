@@ -43,7 +43,13 @@ Nessa primeira versão é realizada CF com base nos faturamentos (cliente `c` co
 Utilizam-se as implementações da técnica do vizinho mais próximo (KNN) disponíveis na biblioteca do [scikit-learn](http://scikit-learn.org/stable/modules/neighbors.html), juntamente com seus parâmetros,
 
 ## Como fazer o treinamento do algoritmo?
-Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` 
+Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Para visualizar os parâmetros, basta abrir o arquivo `train_classifier.py`.
+
+Se for nas configurações padrões (sem alterar os parâmetros), a implementação da técnica do vizinho mais próximo utilizada será a 'brute'. A métrica de distância será a menor distância entre dois pontos (distância euclidiana), o número de vizinho será 12 e o número de estraticações utilizada para fazer a validação cruzada será igual a 10.
+
+Após o término do treinamento, será escolhido a versão com as melhores métricas e será salvo em disco. O nome do arquivo será `user_user_cf_knn-[dia-mes-ano-hora-minuto-segundo].pkl`.
+Além disso, também será gerado um log com as métricas coletadas durante o treinamento dos k modelos (kfolds).
+
 
 ## REFERÊNCIAS
  * [Recommender systems survey](http://romisatriawahono.net/lecture/rm/survey/information%20retrieval/Bobadilla%20-%20Recommender%20Systems%20-%202013.pdf)
