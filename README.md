@@ -42,6 +42,9 @@ Nessa primeira versão é realizada CF com base nos faturamentos (cliente `c` co
 
 Utilizam-se as implementações da técnica do vizinho mais próximo (KNN) disponíveis na biblioteca do [scikit-learn](http://scikit-learn.org/stable/modules/neighbors.html), juntamente com seus parâmetros,
 
+## Como fazer o treinamento do algoritmo?
+Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` 
+
 ## REFERÊNCIAS
  * [Recommender systems survey](http://romisatriawahono.net/lecture/rm/survey/information%20retrieval/Bobadilla%20-%20Recommender%20Systems%20-%202013.pdf)
  * [An Empirical Analysis of Design Choices in Neighborhood](https://www.researchgate.net/profile/Jon_Herlocker/publication/226021885_An_Empirical_Analysis_of_Design_Choices_in_Neighborhood-Based_Collaborative_Filtering_Algorithms/links/00b7d539756e3b1c49000000.pdf)
