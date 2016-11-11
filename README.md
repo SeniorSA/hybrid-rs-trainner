@@ -16,7 +16,8 @@ Para explicar melhor, imagina-se a seguinte situação:
  - `u1` assiste os filmes `Mercenários`, `Mercenários 2`,  `Mercenários 3` e `Atração Perigosa`, `Rambo`
  - `u2` assiste os filmes `Mercenários`, `Mercenários 2`, `American PIE` e `Velozes e Furiosos`, `Se beber, não case`
  - `u3` assiste os filmes `American PIE`, `Mercenários 2`, `Mercenários 3`, `Atração Perigosa`
- - `u4` não assiste nenhum filme
+ - `u4`
+ - `u5` não assiste nenhum filme (novo)
  
 Fica claro que o `u3` é semelhante ao `u1`, pois eles __assistiram 3 filmes iguais__. Seguindo a premissa da CF, um dos filmes recomendados para o usuário `u3` seria `Mercenários`. 
 
@@ -55,8 +56,20 @@ A matriz está ilustrada abaixo:
     u1     1       |       1       |       1       |         1        |   1   |       0      |          0         |         0
     u2     1       |       1       |       0       |         0        |   0   |       1      |          1         |         1
     u3     0       |       1       |       1       |         1        |   0   |       1      |          0         |         0
-    u4     0       |       0       |       0       |         0        |   0   |       0      |          0         |         0
+    u4     1       |       0       |       1       |         1        |   1   |       1      |          1         |         1
+    u5     0       |       0       |       0       |         0        |   0   |       0      |          0         |         0
 
+Assim, usando o algoritmo com as configurações padrões e k=2, as recomendações para o `u2` seriam:
+
+D(u2, u1) = 6
+D(u2, u3) = 5
+D(u2, u4) = 5
+
+Os k=2 vizinhos mais próximos são `u3` e  `u4`, logo as recomendações serão a união das características desses vizinhos:
+Recomendações = 
+   
+    Mercenários | Mercenários 2 | Mercenários 3 | Atração Perigosa | Rambo | American PIE | Se beber, não case | Velozes e Furiosos  
+        0       |       1       |       1       |         1        |   0   |       1      |          0         |         0
 
 ## Como fazer o treinamento do algoritmo?
 Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Os parâmetros disponíveis são:
