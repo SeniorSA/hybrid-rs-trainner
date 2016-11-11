@@ -11,12 +11,13 @@ Para explicar melhor, imagina-se a seguinte situação:
  - Usuário `u1` tem 18 anos e solteiro
  - Usuário `u2` tem 33 anos e é casado
  - Usuário `u3` tem 21 anos e é solteiro
- - Usuário `u4` tem 45 anos e é casado
+ - Usuário `u4` tem 19 anos e é casado
+ - Usuário `u5` tem 45 anos e é casado
  
  - `u1` assiste os filmes `Mercenários`, `Mercenários 2`,  `Mercenários 3` e `Atração Perigosa`, `Rambo`
  - `u2` assiste os filmes `Mercenários`, `Mercenários 2`, `American PIE` e `Velozes e Furiosos`, `Se beber, não case`
  - `u3` assiste os filmes `American PIE`, `Mercenários 2`, `Mercenários 3`, `Atração Perigosa`
- - `u4`
+ - `u4` assiste os filmes `Mercenários`, `Mercenários 3` e `Atração Perigosa`, `Rambo`, `American PIE, `Se beber, não case`, `Velozes e Furiosos`
  - `u5` não assiste nenhum filme (novo)
  
 Fica claro que o `u3` é semelhante ao `u1`, pois eles __assistiram 3 filmes iguais__. Seguindo a premissa da CF, um dos filmes recomendados para o usuário `u3` seria `Mercenários`. 
