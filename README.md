@@ -1,10 +1,11 @@
 # hybrid-rs-trainner #
+Treine suas engines de recomendação with zero code! :)
 
-## Afinal, do que se trata esse repositório?
+## Sistemas de Recomendação
 
 Essse repositório contém um conjunto de scripts com a finalidade de treinar um Sistema de Recomendação Híbrido -Collaborative Filtering (CF) e Content-Based Filtering (CBF)- genérico o suficiente para fazer recomendações para de itens para usuários (conhecidos ou novos). 
 
-## O que é Colaborative Filtering (CF)?
+### O que é Colaborative Filtering (CF)?
 É uma das taxonomias (bastante comum) utilizadas para distinguir os Sistemas de Recomendação. A premissa básica por trás da CF é a de que se um usuário `u1` é semelhante a um usuário `u2` com base em conteúdo colaborativo, então pode-se gerar recomendações para o usuário `u2` com base no usuário `u1`.
 
 Para explicar melhor, imagina-se a seguinte situação:
@@ -23,20 +24,20 @@ Para explicar melhor, imagina-se a seguinte situação:
  
 Fica claro que o `u3` é semelhante ao `u1`, pois eles __assistiram 3 filmes iguais__. Seguindo a premissa da CF, um dos filmes recomendados para o usuário `u3` seria `Mercenários`. 
 
-## O que é Content-Based Filterging (CBF)?
+### O que é Content-Based Filterging (CBF)?
 Assim como a CF é uma taxonomia para distinguir os Sistemas de Recomendação. Esta, por sua vez, faz o estudo de ténicas para gerar recomendações para usuários com base nas características dos mesmos.
 Geralmente é utilizada quando não há informações colaborativas (diga-se coletivas) a respeito de um item ou usuário. Desse modo, para `u4` seria recomendado os filmes que `u2` assistiu, pois __com base nas características dos usuários__ (idade e estado civil) o `u2` é o mais mais semelhante ao `u4`
 
-## O que é Hybrid Filtering?
+### O que é Hybrid Filtering?
 Os Sistemas de Recomendação Híbridos fazem uso tanto de técnicas presentes em CF, quanto em CBF. Na verdade, na maioria das vezes, tomam-se como prioridade as técnicas utilizadas na CF, e caso não haja informações a respeito (usuário ou item novo) utilizam-se técnicas de CBF.
 
 Assim, um Sistema de Recomendação Híbrido seria capaz de gerar recomendações para todos os usuários disponíveis (`u1`, `u2`, `u3`, `u4`). Para o `u3`, por exemplo, seria recomendado `Mercenários`, e para o `u5` seria recomendado os filmes que o `u2` assistiu. Os Híbridos geralmente (almost like everything, não é há convenção na literatura) geram suas recomendações com base nas técnicas de CF, pois estas são mais efetivas (geramente), e caso não haja informações colaborativas, então usam-se técnicas de CBF.
 
-## Qual é a principal diferença entre essas taxonomias?
+### Qual é a principal diferença entre essas taxonomias?
 Diferentes técnicas de Inteligência Artificial (IA) são utilizadas para tratar esses problemas - em alguns casos é utilizado a mesma técnica em CF e CBF. O exemplo mais clássico disso é o uso de algoritmo KNearestNeighbor -.
 A principal distinção entre elas está no uso dos dados para gerar as recomendações - CF usa dados colaborativos para determinar a similaridade e gerar recomendações com base nos itens ou usuários mais similares, enquanto que CBF usa dados individuais para determinar as recomendações para os itens ou usuários mais similares -.
 
-## Como definir qual técnica utilizar para treinar o modelo e gerar as recomendações?
+### Como definir qual técnica utilizar para treinar o modelo e gerar as recomendações?
 Evidentemente não há uma solução para comum para todos os casos. Cada problema é um problema, e como tal, deve ser tratado de forma singular. Portanto, para determinar qual técnica é melhor para um conjunto de dados (domínio), deve-se fazer uma análise dos dados e posteriormente a elaboração e validação de hipóteses.
 
 Algumas das estratégias mais comuns para tratar o problemas de recomendação são:
@@ -50,7 +51,7 @@ Em alguns casos, foi tratado com o uso de técnicas de
  - Sistemas Especialistas
  - Raciocínio Baseado em Caso
 
-## Sobre a library
+### Sobre a library
 O objetivo desse projeto é fornecer um conjunto de scripts e implementações para treinar diferentes engines de Sistemas de Recomendação (CF, CBF ou híbrido) with zero zode :)
 
 No momento essa library só suporta User-User Collaborative Filtering - uma matriz de usuários x itens, onde cada célula representa um rating de um usuário para um item -. As recomendações são geradas observando a __similaridade entre os usuários__.
