@@ -6,6 +6,9 @@ Treine suas engines de recomendação with zero code! :)
   * [Collaborative Filtering](#collaborative-filtering)
   * [Content-Based Filtering](#content-based-filtering)
   * [Hybrid Filtering](#hybrid-filtering)
+  * [Diferenças entre essas taxonomias](#diferenças-entre-essas-taxonomias)
+  * [Escolha de técnicas para gerar recomendações](#escolha-de-técnicas-para-gerar-recomendações)
+* [Sobre a library](#sobre-a-library)
 
 ## Sistemas de Recomendação
 
@@ -38,11 +41,11 @@ Os Sistemas de Recomendação Híbridos fazem uso tanto de técnicas presentes e
 
 Assim, um Sistema de Recomendação Híbrido seria capaz de gerar recomendações para todos os usuários disponíveis (`u1`, `u2`, `u3`, `u4`). Para o `u3`, por exemplo, seria recomendado `Mercenários`, e para o `u5` seria recomendado os filmes que o `u2` assistiu. Os Híbridos geralmente (almost like everything, não é há convenção na literatura) geram suas recomendações com base nas técnicas de CF, pois estas são mais efetivas (geramente), e caso não haja informações colaborativas, então usam-se técnicas de CBF.
 
-### Qual é a principal diferença entre essas taxonomias?
+### Diferenças entre essas taxonomias
 Diferentes técnicas de Inteligência Artificial (IA) são utilizadas para tratar esses problemas - em alguns casos é utilizado a mesma técnica em CF e CBF. O exemplo mais clássico disso é o uso de algoritmo KNearestNeighbor -.
 A principal distinção entre elas está no uso dos dados para gerar as recomendações - CF usa dados colaborativos para determinar a similaridade e gerar recomendações com base nos itens ou usuários mais similares, enquanto que CBF usa dados individuais para determinar as recomendações para os itens ou usuários mais similares -.
 
-### Como definir qual técnica utilizar para treinar o modelo e gerar as recomendações?
+### Escolha de técnicas para gerar recomendações
 Evidentemente não há uma solução para comum para todos os casos. Cada problema é um problema, e como tal, deve ser tratado de forma singular. Portanto, para determinar qual técnica é melhor para um conjunto de dados (domínio), deve-se fazer uma análise dos dados e posteriormente a elaboração e validação de hipóteses.
 
 Algumas das estratégias mais comuns para tratar o problemas de recomendação são:
