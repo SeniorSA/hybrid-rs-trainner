@@ -33,6 +33,11 @@ Assim, um Sistema de Recomendação Híbrido seria capaz de gerar recomendaçõe
 Diferentes técnicas de Inteligência Artificial (IA) são utilizadas para tratar esses problemas - em alguns casos é utilizado a mesma técnica em CF e CBF. O exemplo mais clássico disso é o uso de algoritmo KNearestNeighbor -.
 A principal distinção entre elas está no uso dos dados para gerar as recomendações - CF usa dados colaborativos para determinar a similaridade e gerar recomendações com base nos itens ou usuários mais similares, enquanto que CBF usa dados individuais para determinar as recomendações para os itens ou usuários mais similares -.
 
+## Como definir qual técnica utilizar para treinar o modelo e gerar as recomendações?
+Evidentemente não há uma solução para comum para todos os casos. Cada problema é um problema, e como tal, deve ser tratado de forma singular. Portanto, para determinar qual técnica é melhor para um conjunto de dados (domínio), deve-se fazer uma análise dos dados e posteriormente a elaboração e validação de hipóteses.
+
+Na verdade, o problema de recomendação tem sido tratamento como problema de agrupamento, etc. -, como problema de classificação, como problema de regressão, como problema de regras de associação
+
 ## Algoritmos Suportados
   * KNarest Neighborh (instance-based ou lazy learning)
   
