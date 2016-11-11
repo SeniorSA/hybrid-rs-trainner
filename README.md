@@ -113,6 +113,8 @@ Assim, usando o algoritmo com as configurações padrões e k=2, as recomendaç�
     D(u4, u2) = 4
     D(u4, u3) = 5
 
+`u5` __não foi utilizado no cálculo porque não há informação colaborativa a respeito dele__.
+
 Os `k=2` vizinhos mais próximos são `u1` e  `u2`, logo as recomendações serão a união (nesssa library está implementado como união, porém no futur, será implementado outras estratégias, como por exemplo recomendar somente os filmes que possuem maior frequência - modas) das características desses vizinhos:
 
     Recomendações = 
