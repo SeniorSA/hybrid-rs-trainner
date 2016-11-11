@@ -61,17 +61,17 @@ A matriz está ilustrada abaixo:
     u4     1       |       0       |       1       |         1        |   1   |       1      |          1         |         1
     u5     0       |       0       |       0       |         0        |   0   |       0      |          0         |         0
 
-Assim, usando o algoritmo com as configurações padrões e k=2, as recomendações para o `u2` seriam:
+Assim, usando o algoritmo com as configurações padrões e k=2, as recomendações para o `u4` seriam:
 
-D(u2, u1) = 6
-D(u2, u3) = 5
-D(u2, u4) = 5
+D(u4, u1) = 4
+D(u4, u2) = 4
+D(u4, u3) = 5
 
-Os k=2 vizinhos mais próximos são `u3` e  `u4`, logo as recomendações serão a união das características desses vizinhos:
+Os k=2 vizinhos mais próximos são `u1` e  `u2`, logo as recomendações serão a união (nesssa library está implementado como união, porém no futur, será implementado outras estratégias, como por exemplo recomendar somente os filmes que possuem maior frequência - modas) das características desses vizinhos:
 Recomendações = 
    
     Mercenários | Mercenários 2 | Mercenários 3 | Atração Perigosa | Rambo | American PIE | Se beber, não case | Velozes e Furiosos  
-        0       |       1       |       1       |         1        |   0   |       1      |          0         |         0
+        1       |       1       |       1       |         1        |   1   |       1      |          1         |         1
 
 ## Como fazer o treinamento do algoritmo?
 Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Os parâmetros disponíveis são:
