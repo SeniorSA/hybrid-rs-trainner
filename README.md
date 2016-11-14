@@ -128,7 +128,7 @@ Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `
  - --alg [o algoritmo utilizado para fazer o cálculo dos k vizinhos mais próxixos] disponível [em](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
  - --n-neighbors [inteiro descrevendo o número de vizinhos mais próximos]
  - --top-items [número descrevendo o número dos top items para um usuário de acordo com sua relevância] (AINDA NÃO É SUPORTADO)
- - --leaf-size [inteiro que determina o número de nó folhas utilizado na poda] default: 30. Parâmetro só é utilizado quando quando --alg=kn_tree ou --alg=ball_tree
+ - --leaf-size [inteiro que determina o número de nó folhas utilizado na poda] default: 30. Parâmetro só é utilizado quando quando --alg=kd_tree ou --alg=ball_tree
  - --weights [string definindo a função de peso utilizada na predição] default: 'uniform'. [Mais informações](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
  - --p [inteiro definindo a potência utilizada para fazer o cálculo da distância] [mais informações](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
 
