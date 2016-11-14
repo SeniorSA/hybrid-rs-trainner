@@ -122,7 +122,7 @@ Os `k=2` vizinhos mais próximos são `u1` e  `u2`, logo as recomendações ser�
         1       |       1       |       1       |         1        |   1   |       1      |          1         |         1
 
 ### Como fazer o treinamento do algoritmo
-Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_classifier.py` passando os parâmetros disponíveis. Os parâmetros disponíveis são:
+Dentro do mesmo diretório onde o projeto foi clonado, basta digitar o comando `python train_recommender.py` passando os parâmetros disponíveis. Os parâmetros disponíveis são:
  - --distance-metric [metrica escolhida]. As métricas estão disponíveis [aqui](http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.DistanceMetric.html)
  - --kfold [inteiro descrevendo o número de folds usado na validação cruzada] 
  - --alg [o algoritmo utilizado para fazer o cálculo dos k vizinhos mais próxixos] disponível [em](http://scikit-learn.org/stable/modules/neighbors.html#nearest-neighbor-algorithms)
