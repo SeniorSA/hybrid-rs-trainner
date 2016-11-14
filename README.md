@@ -35,8 +35,7 @@ Para explicar melhor, imagina-se a seguinte situação:
  - `u2` assiste os filmes `Mercenários`, `Mercenários 2`, `American PIE` e `Velozes e Furiosos`, `Se beber, não case`
  - `u3` assiste os filmes `American PIE`, `Mercenários 2`, `Mercenários 3`, `Atração Perigosa`
  - `u4` assiste os filmes `Mercenários`, `Mercenários 3` e `Atração Perigosa`, `Rambo`, `American PIE, `Se beber, não case`, `Velozes e Furiosos`
- - `u5` não assiste nenhum filme (novo)
- 
+ - `u5` não assiste nenhum filme ( 
 Fica claro que o `u3` é semelhante ao `u1`, pois eles __assistiram 3 filmes iguais__. Seguindo a premissa da CF, um dos filmes recomendados para o usuário `u3` seria `Mercenários`.
 
 ### Content-Based Filtering
@@ -87,11 +86,11 @@ Além disso, as seguintes técnicas serão suportados:
  * KNN (instance-based ou lazy learning) User User Collaborative Filtering 
 
 ### Features pendentes
- * KNN (instance-based ou lazy learning) User Item Collaborative Filtering 
+ * KNN (instance-based ou lazy learning) Item-Item Collaborative Filtering 
  * KNN CBF
  * Algoritmos de classificação
  * Algoritmos de regressão
- * Outros algoritmos de agrupamento  
+ * Algoritmos de agrupamento  
 
 ### Funcionando do algoritmo
 Atualmente é suportado a recomendação baseada em filtragem colaborativa de usuário para usuário (User-User Collaborative Filtering). Para tal, cria-se uma matriz (a matriz foi binarizada por questões didáticas) onde as linhas são os usuários e as colunas os filmes. Se o usuário `u` assistiu o filme `f`, então o valor é 1. Do contrário é zero (não assistiu). Portanto, será criado uma matriz de ordem `usuários x filmes`.
