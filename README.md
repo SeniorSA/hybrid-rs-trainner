@@ -12,7 +12,7 @@ Treine suas engines de recomendação with zero code! :)
 * [Sobre a library](#sobre-a-library)
   * [Features suportadas](#features-suportadas)
   * [Features pendentes](#features-pendentes)
-  * [Funcionando do algoritmo](#funcionando-do-algoritmo)
+  * [Funcionamento do algoritmo](#funcionamento-do-algoritmo)
   * [Como fazer o treinamento do algoritmo](#como-fazer-o-treinamento-do-algoritmo)
 * [Referências](#referências)
 * [License](#license)
@@ -92,7 +92,7 @@ Além disso, as seguintes técnicas serão suportados:
  * Algoritmos de regressão
  * Algoritmos de agrupamento  
 
-### Funcionando do algoritmo
+### Funcionamento do algoritmo
 Atualmente é suportado a recomendação baseada em filtragem colaborativa de usuário para usuário (User-User Collaborative Filtering). Para tal, cria-se uma matriz (a matriz foi binarizada por questões didáticas) onde as linhas são os usuários e as colunas os filmes. Se o usuário `u` assistiu o filme `f`, então o valor é 1. Do contrário é zero (não assistiu). Portanto, será criado uma matriz de ordem `usuários x filmes`.
 
 O treinamento do algoritmo ocorre com o cálculo da distância de cada usuário em relação os outros. O cálculo é feito pela implementação escolhida do algoritmo KNN. Para fazer a predição (recomendação) é feito o cálculo dos k vizinhos mais próximos, e então é realizado a união entre as características (se o filme foi assistido ou não) desses vizinhos e então é gerado a recomendação (união das características dos k vizinhos).
